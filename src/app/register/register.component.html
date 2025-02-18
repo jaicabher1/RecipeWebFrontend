@@ -1,2 +1,80 @@
-
-<h1> {{title}}</h1>
+<div class="register-container">
+    <h1>{{ title }}</h1>
+    <form (ngSubmit)="onSubmit()" class="register-form">
+      <!-- Nombre (obligatorio) -->
+      <div class="form-group">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" [(ngModel)]="user.name" name="name" required #name="ngModel">
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message">
+          <span *ngIf="name.errors?.['required']">El nombre es obligatorio.</span>
+        </div>
+      </div>
+  
+      <!-- Apellido -->
+      <div class="form-group">
+        <label for="surname">Apellido:</label>
+        <input type="text" id="surname" [(ngModel)]="user.surname" name="surname">
+      </div>
+  
+      <!-- Email (obligatorio y formato válido) -->
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="user.email" name="email" required #email="ngModel" email>        
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+          <span *ngIf="email.errors?.['required']">El email es obligatorio.</span>
+          <span *ngIf="email.errors?.['email']">El email no tiene un formato válido.</span>
+        </div>
+      </div>
+  
+      <!-- Nick (obligatorio) -->
+      <div class="form-group">
+        <label for="nick">Nick:</label>
+        <input type="text" id="nick" [(ngModel)]="user.nick" name="nick" required #nick="ngModel">
+        <div *ngIf="nick.invalid && (nick.dirty || nick.touched)" class="error-message">
+          <span *ngIf="nick.errors?.['required']">El nick es obligatorio.</span>
+        </div>
+      </div>
+  
+      <!-- Contraseña (obligatorio) -->
+      <div class="form-group">
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" [(ngModel)]="user.password" name="password" required #password="ngModel">
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error-message">
+          <span *ngIf="password.errors?.['required']">La contraseña es obligatoria.</span>
+        </div>
+      </div>
+  
+      <!-- Biografía -->
+      <div class="form-group">
+        <label for="bio">Biografía:</label>
+        <textarea id="bio" [(ngModel)]="user.bio" name="bio"></textarea>
+      </div>
+  
+      <!-- Ubicación -->
+      <div class="form-group">
+        <label for="location">Ubicación:</label>
+        <input type="text" id="location" [(ngModel)]="user.location" name="location">
+      </div>
+  
+      <!-- Imagen (URL) -->
+      <div class="form-group">
+        <label for="image">Imagen (URL):</label>
+        <input type="text" id="image" [(ngModel)]="user.image" name="image">
+      </div>
+  
+      <!-- Número de teléfono -->
+      <div class="form-group">
+        <label for="phoneNumber">Número de teléfono:</label>
+        <input type="text" id="phoneNumber" [(ngModel)]="user.phoneNumber" name="phoneNumber">
+      </div>
+  
+      <!-- Verificado -->
+      <div class="form-group">
+        <label for="isVerified">Verificado:</label>
+        <input type="checkbox" id="isVerified" [(ngModel)]="user.isVerified" name="isVerified">
+      </div>
+  
+      <!-- Botón de envío -->
+      <button type="submit" class="submit-button">Registrarse</button>
+    </form>
+  </div>

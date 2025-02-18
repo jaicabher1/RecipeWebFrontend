@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { RouterModule } from '@angular/router';  // Necesario para usar rutas
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule,],
+  standalone: true,  // Hacemos que este componente sea standalone
+  imports: [RouterModule],  // Solo importamos RouterModule si lo necesitas
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'RecipeWebFrontend';
