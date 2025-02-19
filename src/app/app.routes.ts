@@ -6,10 +6,11 @@ import { RegisterComponent } from './register/register.component';
 
 //Routes
 export const routes: Routes = [
-    {path: '', component: LoginComponent},
-    {path: 'login', component: LoginComponent},
-    {path: 'register', component: RegisterComponent},
+    { path: '', loadComponent: () => import('./login/login.component').then(m => m.LoginComponent) },
+    { path: 'login', loadComponent: () => import('./login/login.component').then(m => m.LoginComponent) },
+    { path: 'register', loadComponent: () => import('./register/register.component').then(m => m.RegisterComponent) }
 ];
+
 
 export const appRoutingProviders: any[] = [];
 export const routing = RouterModule.forRoot(routes);

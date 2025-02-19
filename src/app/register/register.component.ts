@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,8 +17,8 @@ export class RegisterComponent implements OnInit {
   public user: User;
 
   constructor(
-    private _route: ActivatedRoute,
-    private _router: Router
+    private __router: Router,
+    private __userService: UserService
   ) {
     this.title = 'Register';
     this.user = new User(
@@ -44,5 +44,6 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     console.log(this.user);
+    this.__userService.register();
   }
 }

@@ -8,11 +8,8 @@ import { Global } from './global';
   providedIn: 'root'
 })
 export class UserService {
-  public url: string;
-
-  constructor(public _http: HttpClient) {
-    this.url = Global.url;
-  }
+  private url: string = Global.url;
+  constructor(public _http: HttpClient) {}
 
   register(){
     console.log(this.url);
@@ -20,6 +17,6 @@ export class UserService {
 }
 
 
-
+/*
 ME HE QUEDADO EN QUE SI PONGO EN EL CONSTRUCTOR
- DEL COMPONENET EL USERSERVICE NO ME DIRIGE A LA RUTA REGISTER
+ DEL COMPONENET EL USERSERVICE NO ME DIRIGE A LA RUTA REGISTER*/
