@@ -15,12 +15,14 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   public title: string;
   public user: User;
+  public status: string;
 
   constructor(
     private __router: Router,
     private __userService: UserService
   ) {
     this.title = 'Register';
+    this.status = '';
     this.user = new User(
       '',
       '',
@@ -44,6 +46,18 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     console.log(this.user);
-    this.__userService.register();
+    this.__userService.register(this.user).subscribe(
+      (response) => {
+        if(response.user && response.user._id){
+          console.log(response.user);
+          this.status = 'success';
+        } else {
+          this.status = 'error';
+        }
+      },
+      (error) => {
+        console.log(<any>error);
+      }
+    );
   }
 }

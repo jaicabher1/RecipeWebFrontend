@@ -1,5 +1,11 @@
 <div class="register-container">
     <h1>{{ title }}</h1>
+    <div class="alert alert-success" *ngIf="status== 'success'">
+      Registro completado correctamente. <a routerLink="/login">Inicia sesión</a>.
+    </div>
+    <div class="alert alert-danger" *ngIf="status== 'error'">
+      Error al registrar el usuario. Por favor, inténtalo de nuevo.
+    </div>
     <form (ngSubmit)="onSubmit()" class="register-form">
       <!-- Nombre (obligatorio) -->
       <div class="form-group">

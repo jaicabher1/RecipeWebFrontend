@@ -11,8 +11,12 @@ export class UserService {
   private url: string = Global.url;
   constructor(public _http: HttpClient) {}
 
-  register(){
-    console.log(this.url);
+  register(user: User): Observable<any> {
+    let json = JSON.stringify(user);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._http.post(this.url + 'register', json, { headers: headers });
+
+    
   }
 }
 
