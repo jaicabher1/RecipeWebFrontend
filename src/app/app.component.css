@@ -1,108 +1,77 @@
-/* Fondo pastel */
 body {
-    background-color: #fff5e1; /* Color crema pastel */
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding-bottom: 60px; /* Para que el contenido no se oculte por la navbar inferior */
-  }
-  
-  /* Navbar superior */
-  .navigation .navbar {
-    background-color: #ff7043; /* Naranja pastel */
-    padding: 10px;
-  }
-  
-  .navbar-brand {
-    font-weight: bold;
-    color: white;
-  }
-  
-  .navbar-nav .nav-link {
-    color: white;
-    font-size: 16px;
-    transition: 0.3s;
-  }
-  
-  .navbar-nav .nav-link:hover {
-    color: #ffe0b2;
-  }
-  
-  /* Mensaje de bienvenida */
-  .welcome-message {
-    text-align: center;
-    font-size: 20px;
-    color: #d84315;
-    margin-top: 20px;
-    font-weight: bold;
-  }
-  
-  /* Sección de recetas */
-  .recipes-container {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .recipes-container h2 {
-    color: #d84315;
-    font-size: 24px;
-    margin-bottom: 15px;
-  }
-  
-  /* Tarjetas de recetas */
-  .recipe-card {
-    background-color: white;
-    width: 80%;
-    max-width: 350px;
-    margin: 10px auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-  }
-  
-  .recipe-card img {
-    width: 100%;
-    border-radius: 8px;
-  }
-  
-  .recipe-card h3 {
-    font-size: 20px;
-    margin-top: 10px;
-    color: #ff5722;
-  }
-  
-  .recipe-card p {
-    font-size: 14px;
-    color: #757575;
-  }
-  
-  /* Navbar inferior fija */
-  .bottom-navbar {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #ff7043;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .bottom-navbar .nav-item {
-    text-align: center;
-    flex: 1;
-    color: white;
-    font-size: 16px;
-    text-decoration: none;
-    padding: 10px 0;
-    transition: 0.3s;
-  }
-  
-  .bottom-navbar .nav-item i {
-    display: block;
-    font-size: 20px;
-  }
-  
-  .bottom-navbar .nav-item:hover {
-    background-color: #ff5722; /* Un poco más oscuro */
-  }
-  
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fff3e0;
+}
+
+/* Navbar */
+.navigation {
+  background: #ff9800;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px 0;
+  text-align: center;
+}
+
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.navbar-nav .nav-link {
+  font-size: 1rem;
+  color: #fff;
+  transition: color 0.3s;
+  padding: 10px;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ffcc80;
+}
+
+/* Mensaje de bienvenida */
+.welcome-message {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 40px 0;
+  color: #ff5722;
+}
+
+.welcome-message::before {
+  content: "🎉 ";
+}
+
+.welcome-message::after {
+  content: " 🎉";
+}
+
+/* Espacio entre navegación y contenido */
+.main-content {
+  margin-top: 20px;
+  padding: 20px;
+}
+
+/* Bottom Navbar */
+.bottom-navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #ff9800;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+.bottom-navbar .nav-item {
+  text-align: center;
+  font-size: 1rem;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.bottom-navbar .nav-item:hover {
+  color: #ffcc80;
+}

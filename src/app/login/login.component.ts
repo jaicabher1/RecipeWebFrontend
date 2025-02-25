@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
           this.successMessage = 'Login exitoso! Redirigiendo...';
           setTimeout(() => {
             this.router.navigate(['/']);
-          }, 2000); // Redirige después de 2 segundos
+          }); // Redirige después de 2 segundos
         } else {
           this.errorMessage = 'Login exitoso, pero no se recibió token';
         }

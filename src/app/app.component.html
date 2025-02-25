@@ -1,40 +1,21 @@
 <div class="navigation">
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <!-- Logo de la página -->
       <a class="navbar-brand" href="#">🍽️ {{ title }}</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
-      <!-- Menú de navegación -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/">
-              <i class="bi bi-house-door"></i> Home
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/recipes">
-              <i class="bi bi-list"></i> Recetas
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/favorites">
-              <i class="bi bi-heart"></i> Favoritos
-            </a>
+          <li class="nav-item"><a class="nav-link" href="/"><i class="bi bi-house-door"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/recipes"><i class="bi bi-list"></i> Recetas</a></li>
+          <li class="nav-item"><a class="nav-link" href="/favorites"><i class="bi bi-heart"></i> Favoritos</a></li>
+          <li class="nav-item" *ngIf="!userService.isAuthenticated()">
+            <a class="nav-link" href="/register"><i class="bi bi-person-plus"></i> Registrarse</a>
           </li>
           <li class="nav-item" *ngIf="!userService.isAuthenticated()">
-            <a class="nav-link" href="/register">
-              <i class="bi bi-person-plus"></i> Registrarse
-            </a>
-          </li>
-          <li class="nav-item" *ngIf="!userService.isAuthenticated()">
-            <a class="nav-link" href="/login">
-              <i class="bi bi-person-circle"></i> Iniciar Sesión
-            </a>
+            <a class="nav-link" href="/login"><i class="bi bi-person-circle"></i> Iniciar Sesión</a>
           </li>
           <li class="nav-item" *ngIf="userService.isAuthenticated()">
             <a class="nav-link" (click)="userService.logout()" style="cursor: pointer;">
@@ -47,27 +28,15 @@
   </nav>
 </div>
 
-<!-- Mensaje de bienvenida -->
 <div *ngIf="userService.isAuthenticated()" class="welcome-message">
   🍕 ¡Bienvenido, <strong>{{ userName }}</strong>! 🍕
 </div>
 
-<!-- Sección de recetas destacadas -->
-<div *ngIf="userService.isAuthenticated()" class="recipes-container">
-  <h2>Recetas Destacadas</h2>
-  <div class="recipe-card">
-    <img src="assets/pasta.jpg" alt="Pasta deliciosa">
-    <h3>Pasta Carbonara</h3>
-    <p>Una receta italiana clásica con un toque cremoso.</p>
-  </div>
-</div>
 
-<!-- Navbar inferior fija -->
 <div class="bottom-navbar">
   <a href="/" class="nav-item"><i class="bi bi-house-door"></i> Inicio</a>
   <a href="/search" class="nav-item"><i class="bi bi-search"></i> Buscar</a>
   <a href="/profile" class="nav-item"><i class="bi bi-person"></i> Perfil</a>
 </div>
-
 
 <router-outlet></router-outlet>
