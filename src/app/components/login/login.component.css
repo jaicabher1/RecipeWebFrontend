@@ -57,6 +57,12 @@ body {
   border-radius: 5px;
   font-size: 16px;
 }
+/* Contenedor de los botones */
+.button-container {
+  display: flex;
+  flex-direction: column; /* Coloca los botones en una columna */
+  gap: 10px; /* Espacio entre los botones */
+}
 
 /* Botón */
 .login-button {
@@ -72,6 +78,22 @@ body {
 
 .login-button:hover {
   background-color: #0056b3;
+}
+
+/* Botón Registrarte */
+.login-button-register {
+  background-color: #000000;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-button-register:hover {
+  background-color: #5e5555;
 }
 
 /* Mensajes de éxito y error */
