@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
 
     this.userService.login(this.email, this.password, this.getToken).subscribe({
       next: (response) => {
-        console.log('Login exitoso:', response);
         if (response.token) {
           this.successMessage = 'Login exitoso! Redirigiendo...';
           setTimeout(() => {

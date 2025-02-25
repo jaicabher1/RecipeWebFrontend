@@ -23,7 +23,5 @@ export class ProfileComponent implements OnInit {
 
   loadUserProfile(): void {
     this.user = this.userService.getUser(); // Obtiene los datos del usuario
-    console.log("AQUIIIII"); // Muestra los datos del usuario en la consola
-    console.log(this.user); // Muestra los datos del usuario en la consola
   }
 }
