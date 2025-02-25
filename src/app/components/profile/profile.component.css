@@ -1,0 +1,80 @@
+/* Estilos generales */
+.profile-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Título */
+  .profile-title {
+    color: #ff8c00;
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  /* Imagen de perfil */
+  .profile-image-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+  
+  .profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #ff8c00;
+  }
+  
+  /* Tabla */
+  .profile-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .profile-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .profile-table tr:nth-child(even) {
+    background-color: #ffe5cc;
+  }
+  
+  .profile-table tr:nth-child(odd) {
+    background-color: #fff0e0;
+  }
+  
+  .profile-table td:first-child {
+    font-weight: bold;
+    text-align: left;
+    color: #ff8c00;
+  }
+  
+  /* Estado de verificación */
+  .text-success {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .text-danger {
+    color: red;
+    font-weight: bold;
+  }
+  
+  /* Mensaje de error */
+  .profile-error {
+    text-align: center;
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  

@@ -1,0 +1,59 @@
+<div *ngIf="user" class="profile-container">
+    <h2 class="profile-title">👤 Perfil de Usuario</h2>
+  
+    <!-- Imagen del usuario -->
+    <div class="profile-image-container" *ngIf="user.image">
+      <img [src]="user.image" alt="Imagen de perfil" class="profile-image">
+    </div>
+  
+    <!-- Tabla con la información del usuario -->
+    <table class="profile-table">
+      <tbody>
+        <tr>
+          <td><strong>Nombre:</strong></td>
+          <td>{{ user.name }}</td>
+        </tr>
+        <tr>
+          <td><strong>Apellido:</strong></td>
+          <td>{{ user.surname }}</td>
+        </tr>
+        <tr>
+          <td><strong>Email:</strong></td>
+          <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+          <td><strong>Nick:</strong></td>
+          <td>{{ user.nick }}</td>
+        </tr>
+        <tr>
+          <td><strong>Rol:</strong></td>
+          <td>{{ user.role }}</td>
+        </tr>
+        <tr *ngIf="user.bio">
+          <td><strong>Biografía:</strong></td>
+          <td>{{ user.bio }}</td>
+        </tr>
+        <tr *ngIf="user.location">
+          <td><strong>Ubicación:</strong></td>
+          <td>{{ user.location }}</td>
+        </tr>
+        <tr>
+          <td><strong>Verificado:</strong></td>
+          <td>
+            <span [ngClass]="{ 'text-success': user.isVerified, 'text-danger': !user.isVerified }">
+              {{ user.isVerified ? '✅ Sí' : '❌ No' }}
+            </span>
+          </td>
+        </tr>
+        <tr *ngIf="user.phoneNumber">
+          <td><strong>Teléfono:</strong></td>
+          <td>{{ user.phoneNumber }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div *ngIf="!user" class="profile-error">
+    <p>⚠️ No se ha cargado el perfil del usuario.</p>
+  </div>
+  

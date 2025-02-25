@@ -47,7 +47,8 @@ export class UserService {
     if (token) {
       // Decodifica el token para obtener la información del usuario
       const payload = JSON.parse(atob(token.split('.')[1]));
-      return new User(payload._id, payload.name, payload.surname, payload.email, payload.nick, undefined, payload.role);
+      console.log(payload);
+      return new User(payload._id, payload.name, payload.surname, payload.email, payload.nick, payload.role, payload.bio, payload.location, payload.isVerified, payload.image, payload.phoneNumber);
     }
     return null;
   }
