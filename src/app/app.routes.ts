@@ -6,9 +6,10 @@ import { RegisterComponent } from './register/register.component';
 
 //Routes
 export const routes: Routes = [
-    { path: '', loadComponent: () => import('./login/login.component').then(m => m.LoginComponent) },
     { path: 'login', loadComponent: () => import('./login/login.component').then(m => m.LoginComponent) },
-    { path: 'register', loadComponent: () => import('./register/register.component').then(m => m.RegisterComponent) }
+    { path: 'register', loadComponent: () => import('./register/register.component').then(m => m.RegisterComponent) },
+    { path: '**', redirectTo: '' } // Redirige cualquier ruta no válida a la página principal
+
 ];
 
 
