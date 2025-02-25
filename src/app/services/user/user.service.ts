@@ -47,8 +47,11 @@ export class UserService {
     if (token) {
       // Decodifica el token para obtener la información del usuario
       const payload = JSON.parse(atob(token.split('.')[1]));
+      console.log('Payload!!!!!!!!!!!!:', payload);
       console.log(payload);
-      return new User(payload._id, payload.name, payload.surname, payload.email, payload.nick, payload.role, payload.bio, payload.location, payload.isVerified, payload.image, payload.phoneNumber);
+      const user = new User(payload.id, payload.name, payload.surname, payload.email, payload.nick,payload.password, payload.role, payload.bio, payload.location, payload.isVerified, payload.image, payload.phoneNumber);
+      console.log('User!!!!!!!!!!!!:', user);
+      return user;
     }
     return null;
   }
