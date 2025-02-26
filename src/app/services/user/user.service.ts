@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap} from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, tap, throwError} from 'rxjs';
 import { User } from '../../models/user';
 import { Global } from '../global';
 import { Router } from '@angular/router';
@@ -51,6 +51,16 @@ export class UserService {
       return user;
     }
     return null;
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Ocurrió un error inesperado';
+    if (error.error && error.error.message) {
+      errorMessage = error.error.message; // Mensaje de error del backend
+    }
+    // Puedes mostrar el mensaje de error en un snackbar, alerta, etc.
+    console.error(errorMessage);
+    return throwError(errorMessage);
   }
 
 }

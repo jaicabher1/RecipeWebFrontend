@@ -1,77 +1,92 @@
 <div class="register-container">
   <h1>Registrarse</h1>
-  
-  <div class="alert alert-success" *ngIf="status == 'success'">
+
+  <!-- Mensaje de éxito -->
+  <div class="alert alert-success" *ngIf="status === 'success'">
     Registro completado correctamente. <a routerLink="/login">Inicia sesión</a>.
   </div>
-  <div class="alert alert-danger" *ngIf="status == 'error'">
+
+  <!-- Mensaje de error -->
+  <div class="alert alert-danger" *ngIf="status === 'error'">
     Error al registrar el usuario. Por favor, inténtalo de nuevo.
   </div>
 
-  <form (ngSubmit)="onSubmit()" class="register-form">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+    <!-- Nombre -->
     <div class="form-group">
       <label for="name">Nombre:</label>
-      <input type="text" id="name" [(ngModel)]="user.name" name="name" required #name="ngModel">
-      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message">
-        <span *ngIf="name.errors?.['required']">El nombre es obligatorio.</span>
+      <input type="text" id="name" formControlName="name" />
+      <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="error-message">
+        <span *ngIf="registerForm.get('name')?.hasError('required')">El nombre es obligatorio.</span>
       </div>
     </div>
 
+    <!-- Apellido -->
     <div class="form-group">
       <label for="surname">Apellido:</label>
-      <input type="text" id="surname" [(ngModel)]="user.surname" name="surname">
+      <input type="text" id="surname" formControlName="surname" />
     </div>
 
+    <!-- Correo electrónico -->
     <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" id="email" [(ngModel)]="user.email" name="email" required #email="ngModel" email>
-      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
-        <span *ngIf="email.errors?.['required']">El email es obligatorio.</span>
-        <span *ngIf="email.errors?.['email']">El email no tiene un formato válido.</span>
+      <label for="email">Correo electrónico:</label>
+      <input type="email" id="email" formControlName="email" />
+      <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error-message">
+        <span *ngIf="registerForm.get('email')?.hasError('required')">El correo electrónico es obligatorio.</span>
+        <span *ngIf="registerForm.get('email')?.hasError('email')">Correo no válido.</span>
       </div>
     </div>
 
+    <!-- Nick -->
     <div class="form-group">
       <label for="nick">Nick:</label>
-      <input type="text" id="nick" [(ngModel)]="user.nick" name="nick" required #nick="ngModel">
-      <div *ngIf="nick.invalid && (nick.dirty || nick.touched)" class="error-message">
-        <span *ngIf="nick.errors?.['required']">El nick es obligatorio.</span>
+      <input type="text" id="nick" formControlName="nick" />
+      <div *ngIf="registerForm.get('nick')?.invalid && registerForm.get('nick')?.touched" class="error-message">
+        <span *ngIf="registerForm.get('nick')?.hasError('required')">El nick es obligatorio.</span>
       </div>
     </div>
 
+    <!-- Contraseña -->
     <div class="form-group">
       <label for="password">Contraseña:</label>
-      <input type="password" id="password" [(ngModel)]="user.password" name="password" required #password="ngModel">
-      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error-message">
-        <span *ngIf="password.errors?.['required']">La contraseña es obligatoria.</span>
+      <input type="password" id="password" formControlName="password" />
+      <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message">
+        <span *ngIf="registerForm.get('password')?.hasError('required')">La contraseña es obligatoria.</span>
+        <span *ngIf="registerForm.get('password')?.hasError('minlength')">La contraseña debe tener al menos 8 caracteres.</span>
+        <span *ngIf="registerForm.get('password')?.hasError('pattern')">La contraseña debe contener al menos una mayúscula y un número.</span>
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="bio">Biografía:</label>
-      <textarea id="bio" [(ngModel)]="user.bio" name="bio"></textarea>
-    </div>
-
-    <div class="form-group">
-      <label for="location">Ubicación:</label>
-      <input type="text" id="location" [(ngModel)]="user.location" name="location">
-    </div>
-
-    <div class="form-group">
-      <label for="image">Imagen (URL):</label>
-      <input type="text" id="image" [(ngModel)]="user.image" name="image">
-    </div>
-
+    <!-- Teléfono -->
     <div class="form-group">
       <label for="phoneNumber">Número de teléfono:</label>
-      <input type="text" id="phoneNumber" [(ngModel)]="user.phoneNumber" name="phoneNumber">
+      <input type="text" id="phoneNumber" formControlName="phoneNumber" />
+      <div *ngIf="registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched" class="error-message">
+        <span *ngIf="registerForm.get('phoneNumber')?.hasError('required')">El número de teléfono es obligatorio.</span>
+        <span *ngIf="registerForm.get('phoneNumber')?.hasError('pattern')">Debe ser un número de teléfono válido (Ej. +34645454545).</span>
+      </div>
     </div>
 
+    <!-- Biografía -->
     <div class="form-group">
-      <label for="isVerified">Verificado:</label>
-      <input type="checkbox" id="isVerified" [(ngModel)]="user.isVerified" name="isVerified">
+      <label for="bio">Biografía:</label>
+      <textarea id="bio" formControlName="bio"></textarea>
     </div>
 
-    <button type="submit" class="submit-button">Registrarse</button>
+    <!-- Ubicación -->
+    <div class="form-group">
+      <label for="location">Ubicación:</label>
+      <input type="text" id="location" formControlName="location" />
+    </div>
+
+    <!-- Imagen -->
+    <div class="form-group">
+      <label for="image">Imagen (URL):</label>
+      <input type="text" id="image" formControlName="image" />
+    </div>
+
+
+    <!-- Botón de envío -->
+    <button type="submit" class="submit-button" [disabled]="!registerForm.valid">Registrarse</button>
   </form>
 </div>
