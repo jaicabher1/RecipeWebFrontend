@@ -18,30 +18,46 @@ export class LoginComponent implements OnInit {
   getToken: boolean = true;
   successMessage: string = '';
   errorMessage: string = '';
+  errorEmail: string = '';
+  errorPassword: string = '';
 
   constructor(private userService: UserService, private router: Router) {}
 
-  onSubmit(): void {
-    this.successMessage = '';
-    this.errorMessage = '';
-
+  onSubmit(): void { 
+  
+    if (!this.email.trim()) {
+      this.errorEmail = 'El correo electrónico es obligatorio';
+    } else {
+      this.errorEmail = '';
+    }
+  
+    if (!this.password.trim()) {
+      this.errorPassword = 'La contraseña es obligatoria';
+    } else {
+      this.errorPassword = '';
+    }
+  
+    if (this.errorEmail || this.errorPassword) {
+      return;
+    }
+  
     this.userService.login(this.email, this.password, this.getToken).subscribe({
       next: (response) => {
         if (response.token) {
           this.successMessage = 'Login exitoso! Redirigiendo...';
           setTimeout(() => {
             this.router.navigate(['/']);
-          }); // Redirige después de 2 segundos
+          }); 
         } else {
           this.errorMessage = 'Login exitoso, pero no se recibió token';
         }
       },
-      error: (err) => {
-        console.error('Error en el login:', err);
-        this.errorMessage = 'Error en el login. Verifica tus credenciales.';
+      error: () => {
+        this.errorMessage = 'El correo electrónico o la contraseña son incorrectos';
       }
     });
   }
+  
 
   ngOnInit(): void {
     console.log('Componente de login cargado');

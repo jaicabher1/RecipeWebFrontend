@@ -12,7 +12,9 @@
           required
           class="form-input"
         />
+        <div *ngIf="errorEmail" class="error-message">{{ errorEmail }}</div>
       </div>
+
       <div class="form-group">
         <label for="password" class="form-label">Contraseña *</label>
         <input
@@ -23,12 +25,15 @@
           required
           class="form-input"
         />
+        <div *ngIf="errorPassword" class="error-message">{{ errorPassword }}</div>
       </div>
+
       <div class="button-container">
-        <button type="submit" class="login-button">INICIA SESION</button>
-        <button type="button" class="login-button-register" onclick="window.location.href='/register'">¿AÚN SIGUE SIN CUENTA? REGISTRATE</button>
+        <button type="submit" class="login-button">INICIA SESIÓN</button>
+        <button type="button" class="login-button-register" onclick="window.location.href='/register'">
+          ¿AÚN SIN CUENTA? REGÍSTRATE
+        </button>
       </div>
-      
     </form>
 
     <!-- Mensajes de éxito y error -->
