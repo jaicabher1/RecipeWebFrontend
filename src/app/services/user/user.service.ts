@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, tap} from 'rxjs';
+import { catchError, Observable, tap, throwError} from 'rxjs';
 import { User } from '../../models/user';
 import { Global } from '../global';
 import { Router } from '@angular/router';
@@ -15,7 +15,11 @@ export class UserService {
   register(user: User): Observable<any> {
     let json = JSON.stringify(user);
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._http.post(this.url + 'register', json, { headers: headers });   
+    return this._http.post(this.url + 'register', json, { headers: headers }).pipe(
+          catchError((error) => {
+            return throwError(() => error);
+          })
+        );
   } 
     
   login(email: string, password: string, gettoken: boolean = true): Observable<any> {

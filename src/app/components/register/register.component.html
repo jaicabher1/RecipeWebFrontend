@@ -3,12 +3,13 @@
 
   <!-- Mensaje de éxito -->
   <div class="alert alert-success" *ngIf="status === 'success'">
-    Registro completado correctamente. <a routerLink="/login">Inicia sesión</a>.
+    Registro completado correctamente. 
+    <a routerLink="/login">Inicia sesión</a>.
   </div>
 
-  <!-- Mensaje de error -->
+  <!-- Mensaje de error "genérico" -->
   <div class="alert alert-danger" *ngIf="status === 'error'">
-    Error al registrar el usuario. Por favor, inténtalo de nuevo.
+    {{ serverErrorMessage }}
   </div>
 
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
@@ -52,8 +53,10 @@
       <input type="password" id="password" formControlName="password" />
       <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message">
         <span *ngIf="registerForm.get('password')?.hasError('required')">La contraseña es obligatoria.</span>
-        <span *ngIf="registerForm.get('password')?.hasError('minlength')">La contraseña debe tener al menos 8 caracteres.</span>
-        <span *ngIf="registerForm.get('password')?.hasError('pattern')">La contraseña debe contener al menos una mayúscula y un número.</span>
+        <span *ngIf="registerForm.get('password')?.hasError('minlength')">Debe tener al menos 8 caracteres.</span>
+        <span *ngIf="registerForm.get('password')?.hasError('pattern')">
+          Debe contener al menos una mayúscula y un número.
+        </span>
       </div>
     </div>
 
@@ -62,7 +65,7 @@
       <label for="phoneNumber">Número de teléfono:</label>
       <input type="text" id="phoneNumber" formControlName="phoneNumber" />
       <div *ngIf="registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched" class="error-message">
-        <span *ngIf="registerForm.get('phoneNumber')?.hasError('required')">El número de teléfono es obligatorio.</span>
+        <span *ngIf="registerForm.get('phoneNumber')?.hasError('required')">El número es obligatorio.</span>
         <span *ngIf="registerForm.get('phoneNumber')?.hasError('pattern')">Debe ser un número de teléfono válido (Ej. +34645454545).</span>
       </div>
     </div>
@@ -84,7 +87,6 @@
       <label for="image">Imagen (URL):</label>
       <input type="text" id="image" formControlName="image" />
     </div>
-
 
     <!-- Botón de envío -->
     <button type="submit" class="submit-button" [disabled]="!registerForm.valid">Registrarse</button>

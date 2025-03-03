@@ -1,5 +1,5 @@
 .register-container {
-  max-width: 600px;  /* Hacemos el contenedor más ancho */
+  max-width: 600px;
   margin: 40px auto;
   background: rgba(255, 152, 0, 0.9);
   padding: 20px;
@@ -55,7 +55,7 @@
 .alert {
   padding: 10px;
   border-radius: 5px;
-  margin-top: 20px;  /* Agregamos margen arriba para separar del botón */
+  margin-top: 20px;
   font-weight: bold;
 }
 
