@@ -1,0 +1,77 @@
+/* Contenedor principal de Home */
+.home-wrapper {
+    width: 100%;
+    min-height: 100vh; /* que ocupe toda la altura visible */
+    padding: 40px 20px;
+    box-sizing: border-box;
+    /* Si la navbar superior ocupa ~70-80px, 
+       podrías añadir un margin-top para no quedar tapado */
+    margin-top: 70px;
+    /* No ponemos background aquí para que se vea el gradiente del body */
+  }
+  
+  /* Título principal */
+  .page-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #ff5722;
+    margin-bottom: 50px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  }
+  
+  /* Fila (sección) de imagen + texto */
+  .section-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px; /* Centra y limita el bloque a 1200px */
+    margin: 0 auto 60px;
+    gap: 40px;
+    flex-wrap: wrap; /* Responsive en pantallas pequeñas */
+  }
+  
+  /* “Reverse” para invertir orden (imagen izda-texto dcha) */
+  .section-row.reverse {
+    flex-direction: row-reverse;
+  }
+  
+  /* Texto */
+  .section-text {
+    flex: 1;
+    min-width: 280px;
+  }
+  
+  .section-text h3 {
+    margin-top: 0;
+    font-size: 1.6rem;
+    color: #333;
+  }
+  
+  .section-text p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+  }
+  
+  /* Imagen */
+  .section-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    min-width: 280px;
+  }
+  
+  .section-image img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .section-image img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  

@@ -1,0 +1,21 @@
+<div class="home-wrapper">
+    <h2 class="page-title">Welcome to Our Cooking Site!</h2>
+  
+    <!-- Recorrido de secciones (imagen + texto) -->
+    <div *ngFor="let section of sections"
+         class="section-row"
+         [ngClass]="{'reverse': section.imagePosition === 'left'}">
+      
+      <!-- Texto -->
+      <div class="section-text">
+        <h3>{{ section.title }}</h3>
+        <p>{{ section.description }}</p>
+      </div>
+  
+      <!-- Imagen -->
+      <div class="section-image">
+        <img [src]="section.imageUrl" [alt]="section.title" />
+      </div>
+    </div>
+  </div>
+  
