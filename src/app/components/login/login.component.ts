@@ -3,6 +3,7 @@ import { UserService } from '../../services/user/user.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import e from 'cors';
 
 @Component({
   selector: 'app-login',
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit {
       return;
     }
   
-    this.userService.login(this.email, this.password, this.getToken).subscribe({
+    this.userService.login(this.email.trim(), this.password.trim(), this.getToken).subscribe({
       next: (response) => {
         if (response.token) {
           this.successMessage = 'Login exitoso! Redirigiendo...';

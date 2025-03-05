@@ -49,14 +49,45 @@ export class UserService {
   getMyUser(): User | null {
     const token = this.getToken();
     if (token) {
-      // Decodifica el token para obtener la información del usuario
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      const user = new User(payload.sub, payload.name, payload.surname, payload.email, payload.nick, payload.password, payload.role, payload.bio, payload.location, payload.isVerified, payload.image, payload.phoneNumber);
-      return user;
+      try {
+        // Decodifica el payload del token
+        const payloadBase64 = token.split('.')[1]; // Obtiene el payload en base64
+        const decodedPayload = atob(payloadBase64); // Decodifica el base64
+        
+        // Convierte la cadena decodificada a un array de bytes
+        const byteArray = new Uint8Array(decodedPayload.length);
+        for (let i = 0; i < decodedPayload.length; i++) {
+          byteArray[i] = decodedPayload.charCodeAt(i);
+        }
+  
+        // Decodifica el array de bytes como UTF-8
+        const utf8Decoder = new TextDecoder('utf-8');
+        const payload = JSON.parse(utf8Decoder.decode(byteArray));
+  
+        // Crea y retorna el objeto User
+        const user = new User(
+          payload.sub,
+          payload.name,
+          payload.surname,
+          payload.email,
+          payload.nick,
+          payload.password,
+          payload.role,
+          payload.bio,
+          payload.location,
+          payload.isVerified,
+          payload.image,
+          payload.phoneNumber
+        );
+        return user;
+      } catch (error) {
+        console.error('Error al decodificar el token:', error);
+        return null;
+      }
     }
     return null;
   }
-
+  
   getUserById(id: string): Observable<any> {
     const token = this.getToken();
     if (!token) {
