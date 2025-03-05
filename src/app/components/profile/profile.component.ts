@@ -3,6 +3,7 @@ import { UserService } from '../../services/user/user.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { User } from '../../models/user';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,10 +14,11 @@ import { User } from '../../models/user';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit {
+
   user: User | null = null; // Variable para almacenar los datos del usuario
   counters: any = null; // Variable para almacenar los contadores
 
-  constructor(private userService: UserService) { } // Inyectar el servicio
+  constructor(private userService: UserService, private router: Router) { } // Inyectar el servicio
 
   ngOnInit(): void {
     this.loadUserProfile(); // Llama al método para cargar el perfil del usuario
@@ -32,8 +34,20 @@ export class ProfileComponent implements OnInit {
         console.error('Error al obtener los contadores:', err);
       }
     });
-
-
-
   }
+
+  goToFollowing() {
+    this.router.navigate(['/followed']);
+  }
+
+  goToFollowers() {
+    this.router.navigate(['/followers']);
+  }
+
+  goToMyPublications() {
+    this.router.navigate(['/myPublications']);
+  }
+
+
+
 }
