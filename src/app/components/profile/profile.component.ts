@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
   }
 
   goToFollowing() {
-    this.router.navigate(['/followed']);
+    this.router.navigate(['/followings']);
   }
 
   goToFollowers() {
