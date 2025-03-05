@@ -16,7 +16,7 @@ export class AppComponent {
   constructor(public userService: UserService) {}
 
   get userName(): string {
-    const user = this.userService.getUser(); 
+    const user = this.userService.getMyUser(); 
     return user ? user.name : '';
   }
 }

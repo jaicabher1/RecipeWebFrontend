@@ -14,14 +14,26 @@ import { User } from '../../models/user';
 })
 export class ProfileComponent implements OnInit {
   user: User | null = null; // Variable para almacenar los datos del usuario
+  counters: any = null; // Variable para almacenar los contadores
 
-  constructor(private userService: UserService) {} // Inyectar el servicio
+  constructor(private userService: UserService) { } // Inyectar el servicio
 
   ngOnInit(): void {
     this.loadUserProfile(); // Llama al método para cargar el perfil del usuario
   }
 
   loadUserProfile(): void {
-    this.user = this.userService.getUser(); // Obtiene los datos del usuario
+    this.user = this.userService.getMyUser(); // Obtiene los datos del usuario
+    this.userService.getCounters().subscribe({
+      next: (counters) => {
+        this.counters = counters;
+      },
+      error: (err) => {
+        console.error('Error al obtener los contadores:', err);
+      }
+    });
+
+
+
   }
 }

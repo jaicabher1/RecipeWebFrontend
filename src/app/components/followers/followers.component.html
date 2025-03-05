@@ -1,0 +1,30 @@
+<div class="followers-container">
+    <h2>Followers</h2>
+  
+    <!-- Mostramos lista solo si hay seguidores -->
+    <div *ngIf="followers && followers.length > 0; else noFollowers" class="followers-list">
+      <!-- Iteramos sobre cada seguidor -->
+      <div *ngFor="let follower of followers" class="follower-item">
+        <!-- Imagen/avatar del seguidor (ajusta la propiedad según tu backend) -->
+        <img 
+          [src]="follower.image || 'assets/default-avatar.png'" 
+          alt="Avatar" 
+          class="avatar"
+        />
+  
+        <!-- Info del seguidor -->
+        <div class="follower-info">
+          <h3>{{ follower.user.name }}</h3>
+          <p>{{ follower.user.nick }}</p>
+          <!-- Muestra más datos si los tienes (email, etc.) -->
+          <!-- <p>{{ follower.email }}</p> -->
+        </div>
+      </div>
+    </div>
+  
+    <!-- Mensaje si no hay seguidores -->
+    <ng-template #noFollowers>
+      <p class="no-followers">No followers found.</p>
+    </ng-template>
+  </div>
+  

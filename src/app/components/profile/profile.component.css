@@ -77,4 +77,19 @@
     font-weight: bold;
     margin-top: 20px;
   }
+  .profile-table button {
+    background-color: transparent;
+    color: #000000;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+  
+  .profile-table button:hover {
+    background-color: #ff9800;
+  }
+  
   

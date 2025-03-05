@@ -23,13 +23,6 @@ export class PublicationComponent implements OnInit {
     this.loadFollowedPublications();
   }
 
-  getUserNick(): string {
-    this.publications.forEach((publication) => {
-        return publication.user.nick;
-    }
-    );
-    return '';
-  }
 
   loadFollowedPublications(): void {
     this.publicationService.getFollowedPublications().subscribe(

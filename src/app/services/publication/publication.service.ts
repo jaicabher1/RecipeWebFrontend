@@ -31,4 +31,20 @@ export class PublicationService {
       })
     );
   }
+
+  getCounters(): Observable<any> {
+    const token = this.userService.getToken();
+
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token.trim());
+    
+    return this.http.get(this.url + 'counters', { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
 }

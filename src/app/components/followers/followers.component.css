@@ -1,0 +1,67 @@
+.followers-container {
+    width: 80%;
+    max-width: 700px;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-family: Arial, sans-serif;
+  }
+  
+  .followers-container h2 {
+    text-align: center;
+    color: #ff8c00;
+    margin-bottom: 20px;
+  }
+  
+  .followers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Cada seguidor en una “fila” */
+  .follower-item {
+    display: flex;
+    align-items: center;
+    background-color: #fff3e0;
+    border-radius: 8px;
+    padding: 10px;
+    transition: background 0.3s;
+  }
+  
+  .follower-item:hover {
+    background-color: #ffe0b2;
+  }
+  
+  /* Imagen/avatar */
+  .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    border: 2px solid #ff8c00;
+  }
+  
+  /* Datos del seguidor */
+  .follower-info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .follower-info p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  /* Mensaje de “no followers” */
+  .no-followers {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+  }
+  

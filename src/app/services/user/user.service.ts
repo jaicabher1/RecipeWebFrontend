@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, tap, throwError} from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { User } from '../../models/user';
 import { Global } from '../global';
 import { Router } from '@angular/router';
@@ -10,18 +10,18 @@ import { Router } from '@angular/router';
 })
 export class UserService {
   private url: string = Global.url;
-  constructor(private _http: HttpClient, private router: Router) {}
+  constructor(private _http: HttpClient, private router: Router) { }
 
   register(user: User): Observable<any> {
     let json = JSON.stringify(user);
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._http.post(this.url + 'register', json, { headers: headers }).pipe(
-          catchError((error) => {
-            return throwError(() => error);
-          })
-        );
-  } 
-    
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
   login(email: string, password: string, gettoken: boolean = true): Observable<any> {
     const body = { email, password, gettoken };
     return this._http.post(this.url + 'login', body).pipe(
@@ -32,7 +32,7 @@ export class UserService {
       })
     );
   }
-  
+
   logout(): void {
     localStorage.removeItem('authToken');
     this.router.navigate(['/login']);
@@ -46,18 +46,64 @@ export class UserService {
     return localStorage.getItem('authToken');
   }
 
-  getUser(): User | null {
+  getMyUser(): User | null {
     const token = this.getToken();
     if (token) {
       // Decodifica el token para obtener la información del usuario
       const payload = JSON.parse(atob(token.split('.')[1]));
-      const user = new User(payload.id, payload.name, payload.surname, payload.email, payload.nick,payload.password, payload.role, payload.bio, payload.location, payload.isVerified, payload.image, payload.phoneNumber);
+      const user = new User(payload.sub, payload.name, payload.surname, payload.email, payload.nick, payload.password, payload.role, payload.bio, payload.location, payload.isVerified, payload.image, payload.phoneNumber);
       return user;
     }
     return null;
   }
 
+  getUserById(id: string): Observable<any> {
+    const token = this.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+
+    return this._http.get(this.url + 'user/' + parseInt(id),{ headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  getCounters(): Observable<any> {
+    const token = this.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+
+    return this._http.get(this.url + 'counters', { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+
+  getFollowers(userId: number): Observable<any> {
+    const token = this.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+
+    return this._http.get(this.url + 'followers/' + userId, { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
 
 }
-
-
