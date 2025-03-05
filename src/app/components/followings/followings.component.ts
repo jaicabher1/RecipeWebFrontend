@@ -18,13 +18,11 @@ export class FollowingsComponent {
   
     loadfollowings(): void {
       const id = this.userService.getMyUser()?._id;
-      console.log(id);
       if (!id) {
         return console.error('No se puede obtener el id del usuario');
       }
       this.userService.getFollowings(parseInt(id)).subscribe({
         next: (response) => {
-          console.log(response);
           this.followings = response.follows;
         },
         error: (err) => {

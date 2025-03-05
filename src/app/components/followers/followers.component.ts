@@ -18,13 +18,11 @@ export class FollowersComponent implements OnInit {
 
   loadFollowers(): void {
     const id = this.userService.getMyUser()?._id;
-    console.log(id);
     if (!id) {
       return console.error('No se puede obtener el id del usuario');
     }
     this.userService.getFollowers(parseInt(id)).subscribe({
       next: (response) => {
-        console.log(response);
         this.followers = response.follows;
       },
       error: (err) => {

@@ -27,7 +27,6 @@ export class PublicationComponent implements OnInit {
   loadFollowedPublications(): void {
     this.publicationService.getFollowedPublications().subscribe(
       (response: { publications: Publication[] }) => {
-        console.log('Response:', response);
         this.publications = response.publications;
 
       },
