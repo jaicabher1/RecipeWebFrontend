@@ -12,6 +12,7 @@ export const routes: Routes = [
     { path: 'register', loadComponent: () => import('./components/register/register.component').then(m => m.RegisterComponent), canActivate: [userGuard] },
     {path: 'followers', loadComponent: () => import('./components/followers/followers.component').then(m => m.FollowersComponent)},
     {path: 'followings', loadComponent: () => import('./components/followings/followings.component').then(m => m.FollowingsComponent)},
+    {path: 'my-publications', loadComponent: () => import('./components/my-publications/my-publications.component').then(m => m.MyPublicationsComponent)},
     { path: 'recipes', loadComponent: () => import('./components/publication/publication.component').then(m => m.PublicationComponent) },
     { path: '**', redirectTo: '' } // Redirige cualquier ruta no válida a la página principal
     

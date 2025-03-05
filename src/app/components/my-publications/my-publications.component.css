@@ -1,0 +1,95 @@
+/* Contenedor de publicaciones */
+.publications-container {
+    padding: 20px;
+}
+
+/* Card de publicación */
+.publication-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-name {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* Imagen de la publicación */
+.publication-image .image {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+/* Detalles de la publicación */
+.publication-details {
+    margin-top: 15px;
+}
+
+.title-category {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.category {
+    background-color: #ff9800;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Etiquetas */
+.tags {
+    margin-top: 10px;
+}
+
+.tag {
+    background-color: #ffcc80;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-right: 8px;
+    display: inline-block;
+    font-size: 0.9rem;
+}
+
+/* Descripción y pasos */
+.description {
+    margin-top: 10px;
+}
+
+.steps {
+    margin-top: 20px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin-top: 20px;
+}
+
+.views, .difficulty, .prep-time {
+    color: #ff5722;
+}

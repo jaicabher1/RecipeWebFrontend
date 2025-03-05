@@ -47,4 +47,21 @@ export class PublicationService {
       })
     );
   }
+
+  getMyPublications(): Observable<any> {
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+
+    return this.http.get(this.url + 'getmypublications', { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
 }

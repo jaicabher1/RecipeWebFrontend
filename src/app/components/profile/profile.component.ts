@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit {
   }
 
   goToMyPublications() {
-    this.router.navigate(['/myPublications']);
+    this.router.navigate(['/my-publications']);
   }
 
 
