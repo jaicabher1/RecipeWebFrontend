@@ -75,7 +75,6 @@ export class RegisterComponent implements OnInit {
         this.registerForm.value.image,
         this.registerForm.value.phoneNumber
       );
-      console.log('Usuario', user);
 
       this.__userService.register(user).subscribe({
         next: (response) => {
