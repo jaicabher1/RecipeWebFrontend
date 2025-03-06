@@ -24,7 +24,6 @@ export class FollowingsComponent {
       }
       this.userService.getFollowings(parseInt(id)).subscribe({
         next: (response) => {
-          console.log('Followings:', response);
           this.followings = response.follows;
         },
         error: (err) => {

@@ -16,9 +16,10 @@
         <div class="follower-info">
           <h3>{{ follower.user.name }}</h3>
           <p>{{ follower.user.nick }}</p>
-          <!-- Muestra más datos si los tienes (email, etc.) -->
-          <!-- <p>{{ follower.email }}</p> -->
         </div>
+        <button (click)="onSelectUser(follower.user._id)" class="profile-button">
+          Ver perfil
+        </button>
       </div>
     </div>
   

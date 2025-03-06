@@ -112,7 +112,6 @@ export class UserService {
     let headers = new HttpHeaders({
       'Authorization': token.trim()
     });
-    console.log('headers:', headers);
     return this._http.get(this.url + 'counters', { headers }).pipe(
       catchError((error) => {
         return throwError(() => error);

@@ -32,9 +32,8 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  loadUserProfile(id?:string): void {
-    console.log('ID:', id);
-    if(id){
+  loadUserProfile(id?:string): void {  
+    if(id && id !== this.userService.getMyUser()?._id) {
       this.userService.getUserById(id).subscribe({
         next: (response) => {
           this.user = response.user;
@@ -46,7 +45,6 @@ export class ProfileComponent implements OnInit {
       });
     } else {
       this.user = this.userService.getMyUser(); // Obtiene los datos del usuario
-      console.log('User:', this.user);
       this.userService.getCounters().subscribe({
         next: (counters) => {
           this.counters = counters;
