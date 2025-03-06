@@ -13,12 +13,13 @@
         />
   
         <!-- Info del seguidor -->
-        <div class="following-info">
+        <div  class="following-info">
           <h3>{{ following.followed.name }}</h3>
           <p>{{ following.followed.nick }}</p>
-          <!-- Muestra más datos si los tienes (email, etc.) -->
-          <!-- <p>{{ following.email }}</p> -->
         </div>
+        <button (click)="onSelectUser(following.followed._id)" class="profile-button">
+          Ver perfil
+        </button>
       </div>
     </div>
   

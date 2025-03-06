@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'profile', loadComponent: () => import('./components/profile/profile.component').then(m => m.ProfileComponent) },
+    { path: 'profile/:id', loadComponent: () => import('./components/profile/profile.component').then(m => m.ProfileComponent) },
     { path: 'login', loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent) },
     { path: 'register', loadComponent: () => import('./components/register/register.component').then(m => m.RegisterComponent), canActivate: [userGuard] },
     {path: 'followers', loadComponent: () => import('./components/followers/followers.component').then(m => m.FollowersComponent)},

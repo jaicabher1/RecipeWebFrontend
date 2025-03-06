@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-followings',
@@ -10,7 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class FollowingsComponent {
   followings: any[] = [];
-    constructor(private userService: UserService) { }
+    constructor(private userService: UserService, private router:Router) { }
   
     ngOnInit(): void {
       this.loadfollowings();
@@ -30,6 +31,10 @@ export class FollowingsComponent {
           console.error('Error al obtener los seguidores:', err);
         }
       });
+    }
+
+    onSelectUser(id: string): void {
+      this.router.navigate(['/profile', id]);
     }
 
 }
