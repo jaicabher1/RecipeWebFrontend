@@ -1,39 +1,45 @@
 <div class="publications-container">
-    <!-- Publicación -->
     <div class="publication-card" *ngFor="let publication of publications">
-      <div class="user-info">
-        <img [src]="'assets/default-avatar.jpg'" alt="User Avatar" class="user-avatar">
-        <div class="user-name">{{ publication.user }}</div>
-      </div>
-  
-      <div class="publication-image">
-        <img [src]="'assets/default-image.jpg'" alt="Receta" class="image">
-      </div>
-  
-      <div class="publication-details">
-        <div class="title-category">
-          <h3 class="title">{{ publication.title }}</h3>
-          <span class="category">{{ publication.category }}</span>
+      
+      <div class="publication-body">
+        <!-- Columna IZQUIERDA: Imagen fija (miniatura) -->
+        <div class="publication-image">
+          <img [src]="publication.image" alt="Receta" class="image">
         </div>
   
-        <div class="tags">
-          <span *ngFor="let tag of publication.tags" class="tag">{{ tag }}</span>
-        </div>
+        <!-- Columna DERECHA: Información de la receta -->
+        <div class="publication-details">
   
-        <div class="description">
-          <p>{{ publication.description }}</p>
-        </div>
+          <!-- Título y categoría -->
+          <div class="title-category">
+            <h3 class="title">{{ publication.title }}</h3>
+            <span class="category">{{ publication.category }}</span>
+          </div>
   
-        <div class="steps" *ngIf="publication.steps">
-          <h4>Pasos:</h4>
-          <p>{{ publication.steps }}</p>
-        </div>
+          <!-- Tags -->
+          <div class="tags">
+            <span *ngFor="let tag of publication.tags" class="tag">{{ tag }}</span>
+          </div>
   
-        <div class="footer">
-          <span class="views">👁️ {{ publication.views }} vistas</span>
-          <span class="difficulty">Nivel: {{ publication.difficulty }}</span>
-          <span class="prep-time">⏳ {{ publication.prepTime }} min</span>
+          <!-- Descripción -->
+          <div class="description">
+            <p>{{ publication.description }}</p>
+          </div>
+  
+          <!-- Pasos (opcional) -->
+          <div class="steps" *ngIf="publication.steps">
+            <h4>Pasos:</h4>
+            <p>{{ publication.steps }}</p>
+          </div>
+  
+          <!-- Footer (vistas, dificultad, etc.) -->
+          <div class="footer">
+            <span class="views">👁️ {{ publication.views }} vistas</span>
+            <span class="difficulty">Nivel: {{ publication.difficulty }}</span>
+            <span class="prep-time">⏳ {{ publication.prepTime }} min</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  
