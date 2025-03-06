@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,14 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+
+   constructor(public userService: UserService) {}
+  
+    get userName(): string {
+      const user = this.userService.getMyUser(); 
+      return user ? user.name : '';
+    }
+
   public sections = [
     {
       title: 'Recipe 1',

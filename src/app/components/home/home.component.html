@@ -1,6 +1,12 @@
 <div class="home-wrapper">
-    <h2 class="page-title">Welcome to Our Cooking Site!</h2>
-  
+    @if (userService.isAuthenticated()) {
+      <h2 class="page-title">
+        🍕 ¡Bienvenido, <strong>{{ userName }}</strong>! 🍕
+      </h2>
+    } @else {
+      <h2 class="page-title">Welcome to Our Cooking Site!</h2>
+    }
+
     <!-- Recorrido de secciones (imagen + texto) -->
     <div *ngFor="let section of sections"
          class="section-row"
