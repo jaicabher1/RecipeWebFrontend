@@ -2,9 +2,12 @@
     <!-- Publicación -->
     <div class="publication-card" *ngFor="let publication of publications">
       <div class="user-info">
-        <img [src]="publication.user || 'default-avatar.jpg'" alt="User Avatar" class="user-avatar">
-        <div class="user-name">{{ publication.user }}</div>
+        <a [routerLink]="['/profile', publication.user]">
+          <img [src]="publication.userModel.image || 'default-user-image.jpg'" alt="Usuario" class="user-image clickable-avatar">
+        </a>
+        <div class="user-name">{{ publication.userModel.name + " " + publication.userModel.surname }}</div>
       </div>
+           
   
       <div class="publication-image">
         <img [src]="publication.image || 'default-image.jpg'" alt="Receta" class="image">

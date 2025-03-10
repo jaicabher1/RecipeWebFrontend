@@ -1,8 +1,10 @@
+import { User } from "./user";
 
 export class Publication {
   constructor(
     public _id?: string,
     public user: string = '',
+    public userModel: User  = new User(),
     public title: string = '',
     public category: 'Desayuno' | 'Almuerzo' | 'Cena' | 'Postre' | 'Snack' | 'Vegano' | 'Vegetariano' | 'Sin Gluten' | 'Sin Lactosa' = 'Almuerzo',
     public description: string = '',

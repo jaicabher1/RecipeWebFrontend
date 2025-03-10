@@ -1,96 +1,172 @@
-/* Contenedor de publicaciones */
+/* Contenedor general de todas las publicaciones */
 .publications-container {
-    padding: 20px;
-  }
-  
-  /* Card de publicación */
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Tarjeta individual */
+.publication-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+/* Imagen de la publicación */
+.publication-image {
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.publication-image .image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Contenedor de detalles */
+.publication-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Título y categoría */
+.title-category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.category {
+  background-color: #ff9800;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+/* Tags */
+.tags {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tag {
+  background-color: #ffcc80;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+/* Descripción */
+.description {
+  margin-bottom: 10px;
+}
+
+/* Pasos */
+.steps {
+  margin-top: 10px;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.views, .difficulty, .prep-time {
+  font-weight: bold;
+  color: #ff5722;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+/* Imagen de perfil del usuario */
+.user-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;         /* Hace la imagen circular */
+  object-fit: cover;          /* Ajusta bien la imagen */
+  margin-right: 10px;
+  border: 2px solid #ff9800;  /* (Opcional) borde bonito */
+}
+
+
+/* ----------- RESPONSIVE DESIGN ----------- */
+
+/* Ajuste para tablets y pantallas medianas */
+@media (max-width: 1024px) {
   .publication-card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    padding: 20px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
   }
-  
-  .user-info {
-    display: flex;
-    align-items: center;
+
+  .publication-image {
+      width: 250px;
+      height: 250px;
   }
-  
-  .user-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
-  .user-name {
-    font-weight: bold;
-    font-size: 1rem;
-  }
-  
-  /* Imagen de la publicación */
-  .publication-image .image {
-    width: 100%;
-    border-radius: 8px;
-    margin-top: 15px;
-  }
-  
-  /* Detalles de la publicación */
-  .publication-details {
-    margin-top: 15px;
-  }
-  
-  .title-category {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .title {
-    font-size: 1.6rem;
-    font-weight: bold;
-  }
-  
-  .category {
-    background-color: #ff9800;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-  }
-  
-  /* Etiquetas */
-  .tags {
-    margin-top: 10px;
-  }
-  
-  .tag {
-    background-color: #ffcc80;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 20px;
-    margin-right: 8px;
-    display: inline-block;
-    font-size: 0.9rem;
-  }
-  
-  /* Descripción y pasos */
-  .description {
-    margin-top: 10px;
-  }
-  
-  .steps {
-    margin-top: 20px;
-  }
-  
+
   .footer {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    margin-top: 20px;
+      justify-content: center;
+      gap: 15px;
   }
-  
+}
+
+/* Ajuste para móviles */
+@media (max-width: 600px) {
+  .publications-container {
+      padding: 10px;
+  }
+
+  .publication-card {
+      flex-direction: column;
+      align-items: center;
+      padding: 15px;
+  }
+
+  .publication-image {
+      width: 100%;
+      height: auto;
+  }
+
+  .title {
+      font-size: 1.2rem;
+  }
+
+  .tag {
+      font-size: 0.8rem;
+  }
+
+  .footer {
+      flex-direction: column;
+      text-align: center;
+  }
+
   .views, .difficulty, .prep-time {
-    color: #ff5722;
+      font-size: 1rem;
   }
-  
+}
