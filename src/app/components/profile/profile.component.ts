@@ -37,7 +37,10 @@ export class ProfileComponent implements OnInit {
       this.userService.getUserById(id).subscribe({
         next: (response) => {
           this.user = response.user;
-          this.counters = response.counters;
+          var counters = { following: response.following, followed: response.followed, publications: response.publications, showButton:false};
+          this.counters = counters;
+          console.log('Perfil del usuario:', this.user);
+          console.log('Contadores:', this.counters);        
         },
         error: (err) => {
           console.error('Error al obtener el perfil del usuario:', err);
@@ -48,6 +51,7 @@ export class ProfileComponent implements OnInit {
       this.userService.getCounters().subscribe({
         next: (counters) => {
           this.counters = counters;
+          this.counters.showButton = true;
         },
         error: (err) => {
           console.error('Error al obtener los contadores:', err);

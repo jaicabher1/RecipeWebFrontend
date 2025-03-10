@@ -11,21 +11,21 @@
         <tr>
           <!-- Botón para "Following" -->
           <td>
-            <button (click)="onFollowing()">
+            <button [disabled]="!counters.showButton" (click)="onFollowing()">
               <strong>{{ counters.following }} Seguidos</strong>
             </button>
           </td>
 
           <!-- Botón para "Followed" -->
           <td>
-            <button (click)="onFollowers()">
+            <button [disabled]="!counters.showButton" (click)="onFollowers()">
               <strong>{{ counters.followed }} Seguidores</strong>
             </button>
           </td>
 
           <!-- Botón para "Publications" -->
           <td>
-            <button (click)="onMyPublications()">
+            <button [disabled]="!counters.showButton" (click)="onMyPublications()">
               <strong>{{ counters.publications }} Publicaciones</strong>
             </button>
           </td>
