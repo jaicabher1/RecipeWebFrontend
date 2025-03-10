@@ -1,0 +1,28 @@
+<div class="user-search-container">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="getProfileByName(searchTerm)"
+      placeholder="Buscar por nick..."
+    />
+  
+    @if (filteredUsers) {
+      <div>
+         @for (user of filteredUsers; track user._id) {
+          <div class="user-card">
+            <a [routerLink]="['/profile', user._id]">
+                <img [src]="user.image || 'assets/default-user.jpg'" alt="Avatar" class="user-avatar" />
+            </a>
+            <div>
+              <h2>{{ user.nick }}</h2>
+              <p>{{ user.name + " " + user.surname }}</p>
+              <p>{{ user.location }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <p>No se encontraron usuarios.</p>
+    }
+  </div>
+  

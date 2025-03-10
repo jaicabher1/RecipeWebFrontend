@@ -152,5 +152,20 @@ export class UserService {
     );
   }
 
+  getAllUsers(): Observable<any> {
+    const token = this.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+    return this._http.get(this.url + 'users', { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
 
 }

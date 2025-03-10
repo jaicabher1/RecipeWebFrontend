@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 //Routes
 export const routes: Routes = [
     { path: '', component: HomeComponent },
+    {path: 'search', loadComponent: () => import('./components/get-user-profile/get-user-profile.component').then(m => m.GetUserProfileComponent)},
     { path: 'profile', loadComponent: () => import('./components/profile/profile.component').then(m => m.ProfileComponent) },
     { path: 'profile/:id', loadComponent: () => import('./components/profile/profile.component').then(m => m.ProfileComponent) },
     { path: 'login', loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent) },
