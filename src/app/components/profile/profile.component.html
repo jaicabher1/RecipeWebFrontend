@@ -81,6 +81,23 @@
       </tr>
     </tbody>
   </table>
+
+  <div class="follow-buttons">
+    @if(!counters.showButton){
+    <button *ngIf="!isFollowing" class="follow-btn" (click)="onFollow(followedId)">
+      Seguir
+    </button>
+    <button *ngIf="isFollowing" class="unfollow-btn" (click)="onUnfollow(followedId)">
+      Dejar de seguir
+    </button>
+    @if(followMessage){
+    <div [ngClass]="{'alert-success': followMessageType === 'success', 'alert-error': followMessageType === 'error'}" class="follow-alert">
+      {{ followMessage }}
+    </div>
+    }
+    }
+  </div>
+
 </div>
 
 <div *ngIf="!user" class="profile-error">

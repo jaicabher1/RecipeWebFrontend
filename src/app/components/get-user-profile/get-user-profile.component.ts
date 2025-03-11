@@ -3,6 +3,8 @@ import { UserService } from '../../services/user/user.service';
 import { User } from '../../models/user'; // Asegúrate de importar tu modelo
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { FollowService } from '../../services/follow/follow.service';
+import { Follow } from '../../models/follow';
 
 @Component({
   selector: 'app-get-user-profile',
@@ -16,12 +18,12 @@ export class GetUserProfileComponent {
   filteredUsers: User[] = [];     // Lista filtrada
   searchTerm: string = '';        // Término de búsqueda
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.getUsers(); // solo una vez al inicio
   }
-  
+
   getUsers() {
     this.userService.getAllUsers().subscribe(
       response => {
@@ -33,11 +35,12 @@ export class GetUserProfileComponent {
       }
     );
   }
-  
+
   getProfileByName(nick: string) {
     this.filteredUsers = this.users.filter(u =>
       u.nick.toLowerCase().includes(nick.toLowerCase())
     );
   }
-  
+
+
 }

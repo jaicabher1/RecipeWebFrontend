@@ -22,7 +22,7 @@ export class FollowingsComponent {
       if (!id) {
         return console.error('No se puede obtener el id del usuario');
       }
-      this.userService.getFollowings(parseInt(id)).subscribe({
+      this.userService.getFollowings(id).subscribe({
         next: (response) => {
           this.followings = response.follows;
         },

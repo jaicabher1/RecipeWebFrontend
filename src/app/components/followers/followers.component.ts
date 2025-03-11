@@ -22,7 +22,7 @@ export class FollowersComponent implements OnInit {
     if (!id) {
       return console.error('No se puede obtener el id del usuario');
     }
-    this.userService.getFollowers(parseInt(id)).subscribe({
+    this.userService.getFollowers(id).subscribe({
       next: (response) => {
         this.followers = response.follows;
       },
