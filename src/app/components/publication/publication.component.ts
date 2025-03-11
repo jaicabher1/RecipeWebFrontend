@@ -34,7 +34,6 @@ export class PublicationComponent implements OnInit {
         this.publications.forEach((publication: Publication) => {
           this.userService.getUserById(publication.user).subscribe(
             (response: { user: User }) => {
-              console.log('response:', response);
               publication.userModel = response.user; 
             },
             (error: any) => {
