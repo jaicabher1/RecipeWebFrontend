@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { User } from '../../models/user';
 import { Global } from '../global';
 import { Router } from '@angular/router';
@@ -166,6 +166,24 @@ export class UserService {
       })
     );
   }
+
+
+  updateUser(_id: string, user: User): Observable<any> {
+    const token = this.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim(),
+      'Content-Type': 'application/json'
+    });
+  
+    return this._http.put(this.url + 'update-user/' + user._id, user, { headers })
+      .pipe(
+      catchError((error) => throwError(() => error))
+      );
+  }
+  
 
 
 }

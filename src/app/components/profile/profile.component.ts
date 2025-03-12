@@ -44,11 +44,21 @@ export class ProfileComponent implements OnInit {
 
   loadUserProfile(id?: string, isOwnProfile: boolean = false): void {
     if (isOwnProfile) {
-      this.user = this.userService.getMyUser();
-      this.userService.getCounters().subscribe({
-        next: counters => this.counters = { ...counters, showButton: true },
-        error: err => console.error('Error al obtener contadores:', err)
-      });
+      const myId = this.userService.getMyUser()?._id;
+      if (myId) {
+        this.userService.getUserById(myId).subscribe({
+          next: response => {
+            this.user = response.user;
+            this.counters = { 
+              following: response.following, 
+              followed: response.followed, 
+              publications: response.publications,
+              showButton: true 
+            };
+          },
+          error: err => console.error('Error al obtener usuario:', err)
+        });
+      }
     } else if (id) {
       this.getIsFollowing(id);
       this.userService.getUserById(id).subscribe({
@@ -61,10 +71,11 @@ export class ProfileComponent implements OnInit {
             showButton: false
           };
         },
-        error: err => console.error('Error al obtener el perfil del usuario:', err)
+        error: err => console.error('Error al obtener perfil:', err)
       });
     }
   }
+  
 
   getIsFollowing(followedId: string): void {
     this.isFollowing = false;
@@ -129,6 +140,10 @@ export class ProfileComponent implements OnInit {
 
   onMyPublications(): void {
     this.router.navigate(['/my-publications']);
+  }
+
+  onEditProfile(): void {
+    this.router.navigate(['/edit-profile']);
   }
 }
 
