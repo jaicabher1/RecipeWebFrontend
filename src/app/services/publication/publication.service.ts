@@ -97,4 +97,20 @@ export class PublicationService {
     );
   }
 
+  deletePublication(id: string): Observable<any> {
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+
+    return this.http.delete(this.url + 'delete-publication/' + id, { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
 }

@@ -42,4 +42,18 @@ export class MyPublicationsComponent implements OnInit {
   editPublication(publication: any): void {
     this.router.navigate(['/edit-publication', publication._id]);
   }
+
+  deletePublication(idPublication: string): void {
+    if(confirm('¿Estás seguro de eliminar esta publicación?')) {
+      this.publicationService.deletePublication(idPublication).subscribe({
+        next: () => {
+          alert('Publicación eliminada correctamente.');
+          this.closeDetail();
+          this.loadMyPublications(); // refresca la lista
+        },
+        error: (err) => alert('Error al eliminar la publicación.')
+      });
+    }
+  }
+  
 }

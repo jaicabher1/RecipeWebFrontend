@@ -233,5 +233,19 @@
 .edit-btn:hover {
   opacity: 0.9;
 }
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: opacity 0.3s;
+}
+
+.delete-btn:hover {
+  opacity: 0.9;
+}
 
 
