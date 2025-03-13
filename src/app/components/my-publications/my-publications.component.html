@@ -1,38 +1,100 @@
+<button class="new-publication-btn" (click)="openNewPublication()">➕ Nueva Publicación</button>
+
+@if (creatingPublication) {
+<div class="modal-background">
+  <div class="modal-container">
+    <h2>Crear nueva publicación 📄</h2>
+
+    <form #publicationForm="ngForm" (ngSubmit)="savePublication()">
+      <div class="form-group">
+        <label>Título</label>
+        <input type="text" [(ngModel)]="newPublication.title" name="title" required />
+      </div>
+
+      <div class="form-group">
+        <label>Categoría</label>
+        <select [(ngModel)]="newPublication.category" name="category" required>
+          <option value="" disabled selected>Selecciona una categoría</option>
+          <option *ngFor="let cat of categoryOptions" [value]="cat">{{ cat }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Ruta imagen (Ej: assets/recipes/imagen.jpg)</label>
+        <input type="text" [(ngModel)]="newPublication.image" name="image" />
+      </div>
+
+      <div class="form-group">
+        <label>Tags (puedes seleccionar varios)</label>
+        <div class="tag-checkboxes">
+          <label *ngFor="let tag of tagOptions">
+            <input type="checkbox" [value]="tag" #checkbox (change)="onTagToggle(tag, checkbox.checked)"
+              [checked]="newPublication.tags.includes(tag)" />
+
+            {{ tag }}
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Ingredientes (separados por comas)</label>
+        <input type="text" [(ngModel)]="newPublication.ingredients" name="ingredients" required />
+      </div>
+
+      <div class="form-group">
+        <label>Descripción</label>
+        <textarea [(ngModel)]="newPublication.description" name="description" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Pasos</label>
+        <textarea [(ngModel)]="newPublication.steps" name="steps" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Dificultad</label>
+        <select [(ngModel)]="newPublication.difficulty" name="difficulty" required>
+          <option value="Fácil">Fácil</option>
+          <option value="Intermedio">Media</option>
+          <option value="Difícil">Difícil</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Tiempo de preparación (minutos)</label>
+        <input type="number" [(ngModel)]="newPublication.prepTime" name="prepTime" min="1" required />
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="save-btn">Guardar ✅</button>
+        <button type="button" class="close-btn" (click)="closeNewPublication()">Cancelar ❌</button>
+      </div>
+    </form>
+  </div>
+</div>
+}
+
 <div class="publications-container">
   <div class="publication-card" *ngFor="let publication of publications">
-
     <div class="publication-body">
-      <!-- Columna IZQUIERDA: Imagen fija (miniatura) -->
       <div class="publication-image">
         <img [src]="publication.image" alt="Receta" class="image">
       </div>
-
-      <!-- Columna DERECHA: Información de la receta -->
       <div class="publication-details">
-
-        <!-- Título y categoría -->
         <div class="title-category">
           <h3 class="title">{{ publication.title }}</h3>
           <span class="category">{{ publication.category }}</span>
         </div>
-
-        <!-- Tags -->
         <div class="tags">
           <span *ngFor="let tag of publication.tags" class="tag">{{ tag }}</span>
         </div>
-
-        <!-- Descripción -->
         <div class="description">
           <p>{{ publication.description }}</p>
         </div>
-
-        <!-- Pasos (opcional) -->
         <div class="steps" *ngIf="publication.steps">
           <h4>Pasos:</h4>
           <p>{{ publication.steps }}</p>
         </div>
-
-        <!-- Footer (vistas, dificultad, etc.) -->
         <div class="footer">
           <span class="views">👁️ {{ publication.views }} vistas</span>
           <span class="difficulty">Nivel: {{ publication.difficulty }}</span>
@@ -40,10 +102,9 @@
         </div>
       </div>
     </div>
-    <!-- Botón para abrir detalles -->
+
     <button class="detail-button" (click)="openDetail(publication)">Ver detalles 🔍</button>
 
-    <!-- Modal detalles -->
     <div class="modal-background" *ngIf="selectedPublication">
       <div class="modal-container">
         <h2>{{ selectedPublication.title }}</h2>
@@ -74,17 +135,13 @@
           </tr>
           <tr>
             <td><strong>Tags:</strong></td>
-            <td>
-              <span *ngFor="let tag of selectedPublication.tags" class="tag">{{ tag }}</span>
-            </td>
+            <td><span *ngFor="let tag of selectedPublication.tags" class="tag">{{ tag }}</span></td>
           </tr>
         </table>
-        <!-- Botón Editar Publicación -->
         <button (click)="editPublication(selectedPublication)" class="edit-btn">Editar ✏️</button>
         <button (click)="deletePublication(selectedPublication._id)" class="delete-btn">Eliminar 🗑️</button>
         <button (click)="closeDetail()" class="close-btn">Cerrar ❌</button>
       </div>
     </div>
-
   </div>
 </div>

@@ -113,4 +113,25 @@ export class PublicationService {
     );
   }
 
+  savePublication(publication: any): Observable<any> {
+    let json = JSON.stringify(publication);
+    console.log(json);
+    console.log(publication);
+
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim(),
+      'Content-Type': 'application/json'
+    });
+  
+    return this.http.post(this.url + 'save-publication/', json,  { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
 }

@@ -183,7 +183,4 @@ export class UserService {
       catchError((error) => throwError(() => error))
       );
   }
-  
-
-
 }
