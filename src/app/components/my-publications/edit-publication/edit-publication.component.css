@@ -1,0 +1,66 @@
+.edit-publication-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    font-family: Arial, sans-serif;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  textarea,
+  select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  .save-btn,
+  .cancel-btn {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .save-btn {
+    background-color: #4CAF50;
+  }
+  
+  .cancel-btn {
+    background-color: #f44336;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+  

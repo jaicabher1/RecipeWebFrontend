@@ -64,4 +64,37 @@ export class PublicationService {
     );
   }
 
+  getPublicationById(id: string): Observable<any> {
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+    return this.http.get(this.url + 'publication/' + id, { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+
+  updatePublication(publication: any): Observable<any> {
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim(),
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.put(this.url + 'update-publication/' + publication._id, publication, { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
 }
