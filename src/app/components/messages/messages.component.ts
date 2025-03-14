@@ -39,6 +39,7 @@ export class MessagesComponent implements OnInit {
 
   //Funcion auxiliar para añadir un usuario a la lista de usuarios filtrados
   addUniqueUser(userList: any[], userToAdd: any): void {
+    if (!userToAdd) return;
     const exists = userList.some(u => u._id === userToAdd._id);
     if (!exists) {
       userList.push(userToAdd);
@@ -48,8 +49,7 @@ export class MessagesComponent implements OnInit {
   loadUsersMessages() {
     this.messageService.getMyMessages().subscribe(
       response => {
-        console.log(response);
-        for (let message of response.messages) {
+        for (var message of response.messages) {
           this.addUniqueUser(this.filteredUsers, message.receiver);
         }
       },
@@ -62,7 +62,6 @@ export class MessagesComponent implements OnInit {
   loadReceivedMessages() {
     this.messageService.getReceivedMessages().subscribe(
       response => {
-        console.log(response);
         for (let message of response.messages) {
           this.addUniqueUser(this.filteredUsers, message.emitter);
         }

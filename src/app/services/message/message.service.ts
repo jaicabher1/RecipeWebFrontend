@@ -34,7 +34,6 @@ export class MessageService {
 
   getReceivedMessages(): Observable<any> {
     const token = this.userService.getToken();
-    console.log(token);
     if (!token) {
       return throwError(() => new Error('No token available'));
     }
@@ -55,9 +54,6 @@ export class MessageService {
   sendMessage(message: any): Observable<any> {
     const token = this.userService.getToken();
     let json = JSON.stringify(message);
-    console.log(json);
-    console.log(message);
-
 
     if (!token) {
       return throwError(() => new Error('No token available'));
