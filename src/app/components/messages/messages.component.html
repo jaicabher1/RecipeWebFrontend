@@ -1,7 +1,8 @@
 <div class="messages-container">
   <div class="user-list">
-    <input [(ngModel)]="searchTerm" placeholder="Buscar usuarios..." class="search-input" />
-
+    <div class="user-list-header">
+      <button (click)="openNewChatModal()">+ Nuevo chat</button>
+    </div>
     <ul>
       @for (user of filteredUsers; track user._id) {
         <li
@@ -28,4 +29,28 @@
       <app-send-message [user]="selectedUser" (messageSent)="chatDetail.loadMessagesWithUser()"></app-send-message>
     }
   </div>
+
+  @if (showNewChatModal) {
+    <div class="new-chat-modal-backdrop">
+      <div class="new-chat-modal">
+        <h3>Iniciar nuevo chat</h3>
+
+        <input type="text" [(ngModel)]="newChatSearch" placeholder="Buscar usuario..." class="modal-search" />
+
+        <ul class="modal-user-list">
+          @for (user of allUsers; track user._id) {
+            <li (click)="selectNewChatUser(user)" [class.selected]="user._id === selectedNewUser?._id">
+              {{ user.name }} {{ user.surname }} ({{ user.nick }})
+            </li>
+          }
+        </ul>
+        @if (selectedNewUser) {
+          <textarea [(ngModel)]="firstMessageText" placeholder="Escribe tu primer mensaje..." class="modal-textarea"></textarea>
+          <button class="modal-btn-send" (click)="sendFirstMessage()">Enviar</button>
+        }
+
+        <button class="modal-btn-cancel" (click)="closeNewChatModal()">Cancelar</button>
+      </div>
+    </div>
+  }
 </div>

@@ -15,12 +15,18 @@ import { SendMessageComponent } from "./send-message/send-message.component";
 export class MessagesComponent implements OnInit {
 
   searchTerm: string = '';
-  users: any[] = [];
+  allUsers: any[] = [];
   filteredUsers: any[] = [];
   selectedUser: any = null;
   myUser: any;
   messages: any[] = [];
   messageText: string = '';
+
+  // NUEVOS CAMPOS para el modal
+  showNewChatModal: boolean = false;
+  newChatSearch: string = '';
+  selectedNewUser: any = null;
+  firstMessageText: string = '';
 
   constructor(private messageService: MessageService, private userService: UserService) { }
 
@@ -28,6 +34,7 @@ export class MessagesComponent implements OnInit {
     this.myUser = this.userService.getMyUser();
     this.loadUsersMessages();
     this.loadReceivedMessages();
+    this.loadAllUsers();
   }
 
   //Funcion auxiliar para añadir un usuario a la lista de usuarios filtrados
@@ -37,7 +44,7 @@ export class MessagesComponent implements OnInit {
       userList.push(userToAdd);
     }
   }
-  
+
   loadUsersMessages() {
     this.messageService.getMyMessages().subscribe(
       response => {
@@ -69,5 +76,59 @@ export class MessagesComponent implements OnInit {
   selectUser(user: any): void {
     this.selectedUser = user;
   }
+
+  //Nuevo chat
+
+  loadAllUsers() {
+    this.userService.getAllUsers().subscribe(
+      (response) => {
+        const userList = response.users.filter((u: any) =>
+          u._id !== this.myUser._id && !this.filteredUsers.some((fu: any) => fu._id === u._id)
+        );
+        this.allUsers.push(...userList);
+      },
+      error => console.error('Error cargando usuarios', error)
+    );
+  }  
+  
+  openNewChatModal(): void {
+    this.showNewChatModal = true;
+    this.newChatSearch = '';
+    this.selectedNewUser = null;
+    this.firstMessageText = '';
+  }
+
+  closeNewChatModal(): void {
+    this.showNewChatModal = false;
+  }
+
+  selectNewChatUser(user: any): void {
+    this.selectedNewUser = user;
+  }
+
+  sendFirstMessage(): void {
+    const text = this.firstMessageText.trim();
+    if (!text || !this.selectedNewUser) return;
+
+    const message = {
+      emitter: this.myUser._id,
+      receiver: this.selectedNewUser._id,
+      text,
+      viewed: false,
+      created_at: new Date()
+    };
+
+    this.messageService.sendMessage(message).subscribe(
+      () => {
+        this.filteredUsers.push(this.selectedNewUser);
+        this.selectedUser = this.selectedNewUser;
+        this.closeNewChatModal();
+      },
+      error => console.error('Error enviando mensaje inicial', error)
+    );
+  }
+
+
+
 }
 
