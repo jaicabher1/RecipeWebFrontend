@@ -1,0 +1,22 @@
+<div class="messages-container">
+  <div class="user-list">
+    <input [(ngModel)]="searchTerm" placeholder="Buscar usuarios..." class="search-input" />
+
+    @for (user of filteredUsers; track user._id){
+      <li 
+        (click)="selectUser(user)" 
+        [class.selected]="user._id === selectedUser?._id">
+        {{ user.nick }}
+      </li>
+    }
+  </div>
+  <div class="chat-container">
+    @if (selectedUser) {
+      <app-chat-detail [user]="selectedUser" #chatDetail></app-chat-detail>
+      <app-send-message 
+        [user]="selectedUser" 
+        (messageSent)="chatDetail.loadMessagesWithUser()">
+      </app-send-message>
+    }
+  </div>
+</div>

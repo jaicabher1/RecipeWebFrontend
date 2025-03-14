@@ -5,7 +5,6 @@ export class Message {
     public emitter: string = '',
     public receiver: string = '',
     public text?: string,
-    public file?: string,
     public viewed: string = 'false',
     public createdAt?: Date
   ) {}

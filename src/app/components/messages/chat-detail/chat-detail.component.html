@@ -1,0 +1,10 @@
+<div class="chat-detail">
+  <div class="messages" #messagesContainer>
+    <div *ngFor="let message of messages" 
+         [class.my-message]="message.emitter === myUser._id" 
+         class="message">
+      <div class="message-content">{{ message.text }}</div>
+      <div class="message-time">{{ message.createdAt | date: 'shortTime' }}</div>
+    </div>
+  </div>
+</div>

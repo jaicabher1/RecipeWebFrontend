@@ -19,6 +19,7 @@ export const routes: Routes = [
     { path: 'my-publications', loadComponent: () => import('./components/my-publications/my-publications.component').then(m => m.MyPublicationsComponent) },
     { path: 'edit-publication/:id', loadComponent: () => import('./components/my-publications/edit-publication/edit-publication.component').then(m => m.EditPublicationComponent) },
     { path: 'recipes', loadComponent: () => import('./components/publication/publication.component').then(m => m.PublicationComponent) },
+    { path: 'messages', loadComponent: () => import('./components/messages/messages.component').then(m => m.MessagesComponent) },
     { path: '**', redirectTo: '' } // Redirige cualquier ruta no válida a la página principal
 
 ];

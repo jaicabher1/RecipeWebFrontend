@@ -115,8 +115,6 @@ export class PublicationService {
 
   savePublication(publication: any): Observable<any> {
     let json = JSON.stringify(publication);
-    console.log(json);
-    console.log(publication);
 
     const token = this.userService.getToken();
     if (!token) {
