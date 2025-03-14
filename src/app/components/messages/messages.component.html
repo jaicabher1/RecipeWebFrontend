@@ -2,21 +2,30 @@
   <div class="user-list">
     <input [(ngModel)]="searchTerm" placeholder="Buscar usuarios..." class="search-input" />
 
-    @for (user of filteredUsers; track user._id){
-      <li 
-        (click)="selectUser(user)" 
-        [class.selected]="user._id === selectedUser?._id">
-        {{ user.nick }}
-      </li>
-    }
+    <ul>
+      @for (user of filteredUsers; track user._id) {
+        <li
+          (click)="selectUser(user)"
+          [class.selected]="user._id === selectedUser?._id"
+          class="user-card">
+          
+          <div class="user-avatar">
+            <img [src]="user.image || 'assets/default-avatar.png'" alt="Avatar de {{user.nick}}" />
+          </div>
+
+          <div class="user-info">
+            <div class="user-name">{{ user.name }} {{ user.surname }}</div>
+            <div class="user-nick">{{ user.nick }}</div>
+          </div>
+        </li>
+      }
+    </ul>
   </div>
+
   <div class="chat-container">
     @if (selectedUser) {
       <app-chat-detail [user]="selectedUser" #chatDetail></app-chat-detail>
-      <app-send-message 
-        [user]="selectedUser" 
-        (messageSent)="chatDetail.loadMessagesWithUser()">
-      </app-send-message>
+      <app-send-message [user]="selectedUser" (messageSent)="chatDetail.loadMessagesWithUser()"></app-send-message>
     }
   </div>
 </div>
