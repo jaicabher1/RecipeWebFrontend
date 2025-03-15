@@ -1,0 +1,62 @@
+<div class="edit-publication-container">
+    <h2>Editar Publicación ✏️</h2>
+  
+    <form (ngSubmit)="onSubmit()" #editPublicationForm="ngForm">
+      
+      <!-- Título -->
+      <div class="form-group">
+        <label>Título</label>
+        <input type="text" [(ngModel)]="publication.title" name="title" required />
+      </div>
+  
+      <!-- Categoría -->
+      <div class="form-group">
+        <label>Categoría</label>
+        <input type="text" [(ngModel)]="publication.category" name="category" required />
+      </div>
+  
+      <!-- Imagen URL -->
+      <div class="form-group">
+        <label>URL Imagen</label>
+        <input type="text" [(ngModel)]="publication.image" name="image" required />
+      </div>
+  
+      <!-- Tags -->
+      <div class="form-group">
+        <label>Tags (separados por comas)</label>
+        <input type="text" [(ngModel)]="publication.tags" name="tags" required />
+      </div>
+  
+      <!-- Descripción -->
+      <div class="form-group">
+        <label>Descripción</label>
+        <textarea [(ngModel)]="publication.description" name="description" required></textarea>
+      </div>
+  
+      <!-- Pasos -->
+      <div class="form-group">
+        <label>Pasos (opcional)</label>
+        <textarea [(ngModel)]="publication.steps" name="steps"></textarea>
+      </div>
+  
+      <!-- Dificultad -->
+      <div class="form-group">
+        <label>Dificultad</label>
+        <select [(ngModel)]="publication.difficulty" name="difficulty" required>
+          <option value="Fácil">Fácil</option>
+          <option value="Intermedio">Media</option>
+          <option value="Avanzado">Difícil</option>
+        </select>
+      </div>
+  
+      <!-- Tiempo preparación -->
+      <div class="form-group">
+        <label>Tiempo de preparación (minutos)</label>
+        <input type="number" [(ngModel)]="publication.prepTime" name="prepTime" required />
+      </div>
+  
+      <!-- Botones -->
+      <button type="submit" class="save-btn">Guardar Cambios 💾</button>
+      <button type="button" class="cancel-btn" (click)="cancelEdit()">Cancelar ❌</button>
+    </form>
+  </div>

@@ -1,0 +1,108 @@
+/* Estilos generales */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Contenedor con la imagen de fondo */
+.login-container {
+  background: url('/cocina.avif') no-repeat center center;
+  background-size: 100% 100%;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Caja del formulario */
+.login-box {
+  background: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 320px;
+}
+
+/* Título */
+.login-title {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Estilos del formulario */
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Campos de entrada */
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+/* Contenedor de los botones */
+.button-container {
+  display: flex;
+  flex-direction: column; /* Coloca los botones en una columna */
+  gap: 10px; /* Espacio entre los botones */
+}
+
+/* Botón */
+.login-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
+/* Botón Registrarte */
+.login-button-register {
+  background-color: #000000;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-button-register:hover {
+  background-color: #5e5555;
+}
+
+/* Mensajes de éxito y error */
+.success-message {
+  color: green;
+  margin-top: 10px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}

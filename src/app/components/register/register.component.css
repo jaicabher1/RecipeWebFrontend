@@ -1,0 +1,78 @@
+.register-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: rgba(255, 152, 0, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  color: white;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-form .form-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.register-form label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.register-form input,
+.register-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ffcc80;
+  border-radius: 5px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.submit-button {
+  background-color: #ff5722;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #e64a19;
+}
+
+/* Mensajes centrados y con iconos */
+.alert {
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.alert-success {
+  background: #4caf50;
+  color: white;
+}
+
+.alert-success::before {
+  content: "✅ ";
+}
+
+.alert-danger {
+  background: #d32f2f;
+  color: white;
+}
+
+.alert-danger::before {
+  content: "❌ ";
+}
