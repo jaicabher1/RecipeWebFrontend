@@ -20,14 +20,21 @@ export class EditProfileComponent implements OnInit {
   messageType: 'success' | 'error' | null = null;
   subscription: any;
 
-
-
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    const currentUser = this.userService.getMyUser();
-    if (currentUser) {
-      this.user = currentUser;
+    const currentUserId = this.userService.getMyUser()?._id;
+    if (currentUserId) {
+      this.userService.getUserById(currentUserId).subscribe({
+        next: (response) => {
+          console.log(response.user);
+          this.user = response.user;
+        },
+        error: (error) => {
+          this.message = `❌ Error: ${error.error?.message || error.message}`;
+          this.messageType = 'error';
+        }
+      });
     } else {
       // Handle the case when no user is found
       this.message = '❌ Error: Usuario no encontrado';

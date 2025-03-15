@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-home',
@@ -12,9 +13,17 @@ export class HomeComponent {
 
    constructor(public userService: UserService) {}
   
-    get userName(): string {
-      const user = this.userService.getMyUser(); 
-      return user ? user.name : '';
+    userName: string = '';
+    
+    ngOnInit(): void {
+      const userId = this.userService.getMyUser()?._id;
+      console.log(userId);
+      if (userId) {
+        this.userService.getUserById(userId).subscribe((response) => {
+          console.log(response);
+          this.userName = response.user ? response.user.name : '';
+        });
+      }
     }
 
   public sections = [
