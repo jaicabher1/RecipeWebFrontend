@@ -170,3 +170,11 @@
       font-size: 1rem;
   }
 }
+.likes, .comments {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #ff5722;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

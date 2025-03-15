@@ -1,0 +1,97 @@
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: 1000;
+    backdrop-filter: blur(1px);
+  }
+  
+  .modal-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    z-index: 1001;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .close-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .modal-body {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .like-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .like-item {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .like-user-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .like-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+  }
+  
+  .like-text-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .user-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 16px;
+  }
+  
+  .nick {
+    font-size: 14px;
+    color: #888;
+    margin-left: 4px;
+    font-style: italic;
+  }
+  
+  .like-date {
+    font-size: 13px;
+    color: #777;
+    margin-top: 2px;
+  }
+  

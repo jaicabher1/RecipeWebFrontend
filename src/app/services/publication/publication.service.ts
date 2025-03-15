@@ -132,4 +132,102 @@ export class PublicationService {
     );
   }
 
+  getNumLikes(id: string): Observable<any> {
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+
+    return this.http.get(this.url + 'numLikes/' + id, { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  sendLike(id: string): Observable<any> {
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+
+    return this.http.get(this.url + 'like/' + id, { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  deleteLike(id: string): Observable<any> {
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+
+    return this.http.get(this.url + 'like/' + id, { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  getComments(id: string): Observable<any> {
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+
+    return this.http.get(this.url + 'numComments/' + id, { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  sendComment(id: string, comment: string): Observable<any> {
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+
+    return this.http.post(this.url + 'comment/' + id, { comment }, { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  deleteComment(commentId: string): Observable<any> {
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+
+    return this.http.get(this.url + 'comment/' + commentId, { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+
+
 }
