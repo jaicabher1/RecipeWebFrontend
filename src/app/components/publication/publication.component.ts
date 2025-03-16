@@ -30,6 +30,7 @@ export class PublicationComponent implements OnInit {
   // Modal de Comments
   showCommentsModal: boolean = false;
   selectedComments: any[] = [];
+  selectedPublicationId: string = '';
 
   constructor(
     private publicationService: PublicationService,
@@ -89,7 +90,6 @@ export class PublicationComponent implements OnInit {
   loadNumComments(publicationId: string): void {
     this.publicationService.getComments(publicationId).subscribe(
       (response: any) => {
-        console.log('Comentarios:', response);
         this.commentsMap[publicationId] = response?.totalComments || 0;
         // También almacenamos los usuarios que comentaron si quieres mostrarlos
         this.publications.find(pub => pub._id === publicationId).commentList = response.comments || [];
@@ -123,6 +123,7 @@ export class PublicationComponent implements OnInit {
   // 👇 Modal de Comments
   openCommentsModal(publicationId: string): void {
     const publication = this.publications.find(pub => pub._id === publicationId);
+    this.selectedPublicationId = publicationId;
     this.selectedComments = publication?.commentList || [];
     this.showCommentsModal = true;
   }

@@ -196,8 +196,10 @@ export class PublicationService {
     );
   }
 
-  sendComment(id: string, comment: string): Observable<any> {
+  sendComment(publicationId: string, text: string): Observable<any> {
     const token = this.userService.getToken();
+    console.log(publicationId);
+    console.log(text);
     if (!token) {
       return throwError(() => new Error('No token available'));
     }
@@ -205,7 +207,7 @@ export class PublicationService {
       'Authorization': token.trim()
     });
 
-    return this.http.post(this.url + 'comment/' + id, { comment }, { headers }).pipe(
+    return this.http.post(this.url + 'comment/' + publicationId, { text }, { headers }).pipe(
       catchError((error) => {
         return throwError(() => error);
       })
@@ -221,7 +223,7 @@ export class PublicationService {
       'Authorization': token.trim()
     });
 
-    return this.http.get(this.url + 'comment/' + commentId, { headers }).pipe(
+    return this.http.delete(this.url + 'comment/' + commentId, { headers }).pipe(
       catchError((error) => {
         return throwError(() => error);
       })
