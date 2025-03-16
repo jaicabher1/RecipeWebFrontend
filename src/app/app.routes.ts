@@ -4,10 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { isAuthenticatedGuard, isNotAuthenticatedGuard, profileGuard } from './services/user/user.guard';
 import { HomeComponent } from './components/home/home.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { LegalInfoComponent } from './components/home/legal-info/legal-info.component';
 
 //Routes
 export const routes: Routes = [
     { path: '', component: HomeComponent },
+    { path: 'legal/:type', component: LegalInfoComponent },
     { path: 'search', loadComponent: () => import('./components/get-user-profile/get-user-profile.component').then(m => m.GetUserProfileComponent), canActivate: [isNotAuthenticatedGuard] },
     { path: 'profile', loadComponent: () => import('./components/profile/profile.component').then(m => m.ProfileComponent), canActivate: [profileGuard] },
     { path: 'profile/:id', loadComponent: () => import('./components/profile/profile.component').then(m => m.ProfileComponent), canActivate: [profileGuard] },

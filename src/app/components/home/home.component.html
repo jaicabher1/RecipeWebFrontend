@@ -1,25 +1,26 @@
 <div class="home-wrapper">
-  @if (userService.isAuthenticated()) {
-  <h2 class="page-title">
-    🍕 ¡Bienvenido, <strong>{{ userName }}</strong>! 🍕
-  </h2>
-  } @else {
-  <h2 class="page-title">Welcome to Our Cooking Site!</h2>
-  }
-  @if (!userService.isAuthenticated()) {
-  <!-- Recorrido de secciones (imagen + texto) -->
-  <div *ngFor="let section of sections" class="section-row" [ngClass]="{'reverse': section.imagePosition === 'left'}">
-
-    <!-- Texto -->
-    <div class="section-text">
-      <h3>{{ section.title }}</h3>
-      <p>{{ section.description }}</p>
+  <div class="branding-container">
+    <div class="logo-section">
+      <img src="../assets/logo.png" alt="Logo Red Social Recetas Jaime" class="branding-logo-large" />
     </div>
+    <div class="welcome-section">
+      <h1 class="branding-title">Happening now</h1>
+      <br />
+      <br />
+      <br />
 
-    <!-- Imagen -->
-    <div class="section-image">
-      <img [src]="section.imageUrl" [alt]="section.title" />
+      <h2 class="branding-subtitle">Join today.</h2>
+
+      <div class="auth-buttons">
+        <a href="/login"><button class="signup-btn">Iniciar Sesión</button></a>
+        <a href="/register"><button class="signup-btn">Registrarse</button></a>
+      </div>
+
+      <div class="terms-section">
+        <p class="terms-text">
+          Al continuar, aceptas nuestros <a href="legal/terms">Términos de servicio</a> y <a href="legal/privacy">Política de privacidad</a>.
+        </p>
+      </div>
     </div>
   </div>
-  }
 </div>
