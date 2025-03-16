@@ -56,9 +56,15 @@
         <span class="difficulty">Nivel: {{ publication.difficulty }}</span>
         <span class="prep-time">⏳ {{ publication.prepTime }} min</span>
         <!-- Botón de mostrar likes por publicación -->
-        <span class="likes clickable" (click)="openLikesModal(publication._id)">
-          ❤️ {{ getLikeCount(publication._id) }} likes
-        </span>
+         @if(isLiked(publication._id)) {
+          <span class="likes clickable" (click)="openLikesModal(publication._id)">
+            ❤️ {{ getLikeCount(publication._id) }} likes
+          </span>
+         } @else {
+          <span class="likes clickable" (click)="openLikesModal(publication._id)">
+            🤍 {{ getLikeCount(publication._id) }} likes
+          </span>
+         }
         <!-- Componente modal de likes -->
         <app-like-modal *ngIf="showLikesModal" [likes]="selectedLikes" (close)="closeLikesModal()"></app-like-modal>
         <span class="likes clickable" (click)="openCommentsModal(publication._id)">

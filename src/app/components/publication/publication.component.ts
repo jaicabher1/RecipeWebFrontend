@@ -110,6 +110,20 @@ export class PublicationComponent implements OnInit {
   }
 
   // 👇 Modal de Likes
+
+  isLiked(publicationId: string): boolean {
+    const publication = this.publications.find(pub => pub._id === publicationId);
+    const userId = this.userService.getMyUser()?._id;
+  
+    if (!publication || !userId || !Array.isArray(publication.likesList)) {
+      return false;
+    }
+    console.log(publication.likesList.some((like: any) => like.user?._id === userId));
+  
+    return publication.likesList.some((like: any) => like.user?._id === userId);
+  }
+  
+
   openLikesModal(publicationId: string): void {
     const publication = this.publications.find(pub => pub._id === publicationId);
     this.selectedLikes = publication?.likesList || [];
