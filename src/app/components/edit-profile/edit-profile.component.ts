@@ -13,8 +13,6 @@ import { CommonModule } from '@angular/common';
 })
 export class EditProfileComponent implements OnInit {
 
-  // NO SE ACTUALIZA NI EN HOME COMPONENT NI EN EDIT PROFILE COMPONENT
-
   user: User = new User();
   message: string | null = null;
   messageType: 'success' | 'error' | null = null;
