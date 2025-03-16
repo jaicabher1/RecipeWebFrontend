@@ -117,13 +117,58 @@ export class PublicationComponent implements OnInit {
   
     if (!publication || !userId || !Array.isArray(publication.likesList)) {
       return false;
-    }
-    console.log(publication.likesList.some((like: any) => like.user?._id === userId));
-  
+    }  
     return publication.likesList.some((like: any) => like.user?._id === userId);
   }
-  
 
+  toggleLike(publicationId: string): void {
+    if (this.isLiked(publicationId)) {
+      this.deleteLike(publicationId);
+    } else {
+      this.sendLike(publicationId);
+    }
+  }
+  
+  sendLike(publicationId: string): void {
+    this.publicationService.sendLike(publicationId).subscribe({
+      next: (res) => {
+        const user = this.userService.getMyUser();
+        if (user) {
+          const publication = this.publications.find(p => p._id === publicationId);
+          if (publication) {
+            publication.likesList = publication.likesList || [];
+            publication.likesList.push({ user: user, createdAt: new Date() });
+            this.likesMap[publicationId] = (this.likesMap[publicationId] || 0) + 1;
+          }
+        }
+      },
+      error: (err) => {
+        console.error('Error al dar like:', err);
+      }
+    });
+  }
+  
+  deleteLike(publicationId: string): void {
+    const publication = this.publications.find(p => p._id === publicationId);
+    const userId = this.userService.getMyUser()?._id;
+  
+    if (!publication || !userId) return;
+  
+    // Encontrar el like del usuario actual
+    const like = publication.likesList?.find((l: any) => l.user?._id === userId);
+    if (!like) return;
+    this.publicationService.deleteLike(publicationId).subscribe({
+      next: () => {
+        // Actualizar UI localmente
+        publication.likesList = publication.likesList.filter((l: any) => l.user?._id !== userId);
+        this.likesMap[publicationId] = Math.max((this.likesMap[publicationId] || 1) - 1, 0);
+      },
+      error: (err) => {
+        console.error('Error al eliminar like:', err);
+      }
+    });
+  }
+  
   openLikesModal(publicationId: string): void {
     const publication = this.publications.find(pub => pub._id === publicationId);
     this.selectedLikes = publication?.likesList || [];

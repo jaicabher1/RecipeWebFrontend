@@ -148,7 +148,7 @@ export class PublicationService {
     );
   }
 
-  sendLike(id: string): Observable<any> {
+  sendLike(publicationId: string): Observable<any> {
     const token = this.userService.getToken();
     if (!token) {
       return throwError(() => new Error('No token available'));
@@ -157,15 +157,16 @@ export class PublicationService {
       'Authorization': token.trim()
     });
 
-    return this.http.get(this.url + 'like/' + id, { headers }).pipe(
+    return this.http.post(this.url + 'like/' + publicationId, {}, { headers }).pipe(
       catchError((error) => {
         return throwError(() => error);
       })
     );
   }
 
-  deleteLike(id: string): Observable<any> {
+  deleteLike(publicationId: string): Observable<any> {
     const token = this.userService.getToken();
+    console.log(token);
     if (!token) {
       return throwError(() => new Error('No token available'));
     }
@@ -173,7 +174,7 @@ export class PublicationService {
       'Authorization': token.trim()
     });
 
-    return this.http.get(this.url + 'like/' + id, { headers }).pipe(
+    return this.http.delete(this.url + 'like/' + publicationId, { headers }).pipe(
       catchError((error) => {
         return throwError(() => error);
       })
@@ -188,6 +189,7 @@ export class PublicationService {
     let headers = new HttpHeaders({
       'Authorization': token.trim()
     });
+
 
     return this.http.get(this.url + 'numComments/' + id, { headers }).pipe(
       catchError((error) => {

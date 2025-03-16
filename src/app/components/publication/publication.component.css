@@ -178,3 +178,28 @@
   align-items: center;
   gap: 5px;
 }
+/* Estilo del ícono del corazón */
+.heart-icon {
+  cursor: pointer;
+  font-size: 1.3rem;
+  transition: transform 0.2s ease;
+}
+
+.heart-icon:hover {
+  transform: scale(1.2);
+  cursor: grab; /* o pointer si prefieres */
+}
+
+/* Estilo del contador de likes */
+.like-count {
+  cursor: zoom-in; /* Estilo diferente para que se note que abre modal */
+  color: #ff5722;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.like-count:hover {
+  color: #e64a19;
+}
+
+

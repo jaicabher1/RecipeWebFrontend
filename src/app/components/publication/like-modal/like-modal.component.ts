@@ -25,4 +25,5 @@ export class LikeModalComponent {
   onClose(): void {
     this.close.emit();
   }
+
 }
