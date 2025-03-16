@@ -1,3 +1,4 @@
+@if(!userService.isAuthenticated()){
 <div class="home-wrapper">
   <div class="branding-container">
     <div class="logo-section">
@@ -18,9 +19,18 @@
 
       <div class="terms-section">
         <p class="terms-text">
-          Al continuar, aceptas nuestros <a href="legal/terms">Términos de servicio</a> y <a href="legal/privacy">Política de privacidad</a>.
+          Al continuar, aceptas nuestros <a href="legal/terms">Términos de servicio</a> y <a
+            href="legal/privacy">Política de privacidad</a>.
         </p>
       </div>
     </div>
   </div>
 </div>
+} @else {
+<div class="home-wrapper">
+  <h2 class="page-title">
+    🍕 ¡Bienvenido, <strong>{{ userName }}</strong>! 🍕
+  </h2>
+</div>
+
+}
