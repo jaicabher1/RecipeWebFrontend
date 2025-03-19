@@ -2,12 +2,8 @@
     <h2>Wordle Ingredientes 🍅</h2>
     <div class="board">
         <div class="row" *ngFor="let row of guesses; let rowIndex = index">
-            <div class="tile" [ngClass]="{
-            'filled': rowIndex <= currentRow,
-            'correct': word[i] === row[i],
-            'present': word.includes(row[i]) && word[i] !== row[i],
-            'absent': row[i] && !word.includes(row[i])
-          }" *ngFor="let letter of row; let i = index">
+            <div class="tile" [ngClass]="getTileClass(rowIndex, i)" 
+                 *ngFor="let letter of row; let i = index">
                 {{ letter }}
             </div>
         </div>
@@ -16,8 +12,8 @@
     <div class="keyboard">
         <button *ngFor="let key of keyboard" [style.background]="letterColors[key]" (click)="handleKey(key)">
             {{key}}
-            </button>
-            <button class="wide" (click)="handleKey('Backspace')">⌫</button>
-            <button class="wide" (click)="handleKey('Enter')">↵</button>
+        </button>
+        <button class="wide" (click)="handleKey('Backspace')">⌫</button>
+        <button class="wide" (click)="handleKey('Enter')">↵</button>
     </div>
 </div>

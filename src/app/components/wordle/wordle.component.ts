@@ -42,6 +42,23 @@ export class WordleComponent implements OnInit {
     return Math.abs((h & 0xffffff) / 0xffffff);
   }
 
+  getTileClass(rowIndex: number, tileIndex: number): any {
+    if (!this.rowsSubmitted[rowIndex]) {
+      return {}; // No aplica colores si la fila no ha sido enviada
+    }
+  
+    const letter = this.guesses[rowIndex][tileIndex];
+  
+    if (this.word[tileIndex] === letter) {
+      return { 'correct': true };
+    } else if (this.word.includes(letter)) {
+      return { 'present': true };
+    } else {
+      return { 'absent': true };
+    }
+  }
+  
+
   @HostListener('window:keydown', ['$event'])
   handlePhysicalKeyboard(event: KeyboardEvent): void {
     this.handleKey(event.key);
