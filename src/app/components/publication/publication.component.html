@@ -79,8 +79,8 @@
         <span class="heart-icon" (click)="openCommentsModal(publication._id)">
           💬 {{ getCommentCount(publication._id) }} comentarios
         </span>
-        <app-comment-modal *ngIf="showCommentsModal" [publicationId]="selectedPublicationId"
-          [comments]="selectedComments" (close)="closeCommentsModal()"></app-comment-modal>
+        <app-comment-modal *ngIf="showCommentsModal" [publicationId]="selectedPublicationId" [currentUserId]="currentUserId" [comments]="selectedComments" (close)="closeCommentsModal()">
+        </app-comment-modal>
 
       </div>
 

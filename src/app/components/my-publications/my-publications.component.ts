@@ -20,8 +20,8 @@ export class MyPublicationsComponent implements OnInit {
   newPublication: any = {};
 
   // Opciones válidas para enums
-  categoryOptions: string[] = ['Vegano', 'Vegetariano', 'Carnes', 'Postres', 'Bebidas', 'Pescado'];
-  tagOptions: string[] = ['Saludable', 'Rápido', 'Económico', 'Sin Gluten', 'Sin Lactosa'];
+  categoryOptions: string[] = ['Desayuno', 'Almuerzo', 'Cena', 'Postre', 'Snack', 'Vegano', 'Vegetariano', 'Sin Gluten', 'Sin Lactosa'];
+  tagOptions: string[] = ['Rápido','Vegetariano','Dulce', 'Fácil', 'Saludable', 'Económico', 'Internacional', 'Gourmet', 'Tradicional', 'Fiesta', 'Navidad', 'Halloween', 'San Valentín', 'Verano', 'Invierno', 'Otoño', 'Primavera','Internacional','Sin Gluten','Sin Lactosa','Vegano','Vegetariano'];
 
   constructor(private publicationService: PublicationService, private router: Router) { }
 

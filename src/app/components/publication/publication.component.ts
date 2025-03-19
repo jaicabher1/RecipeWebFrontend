@@ -31,11 +31,14 @@ export class PublicationComponent implements OnInit {
   showCommentsModal: boolean = false;
   selectedComments: any[] = [];
   selectedPublicationId: string = '';
+  currentUserId: string = '';
+
 
   constructor(
     private publicationService: PublicationService,
     private userService: UserService
   ) {}
+
 
   ngOnInit(): void {
     this.loadFollowedPublications();
@@ -182,6 +185,7 @@ export class PublicationComponent implements OnInit {
   // 👇 Modal de Comments
   openCommentsModal(publicationId: string): void {
     const publication = this.publications.find(pub => pub._id === publicationId);
+    this.currentUserId = this.userService.getMyUser()?._id || '';
     this.selectedPublicationId = publicationId;
     this.selectedComments = publication?.commentList || [];
     this.showCommentsModal = true;

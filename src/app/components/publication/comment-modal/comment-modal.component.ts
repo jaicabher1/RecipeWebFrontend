@@ -3,6 +3,7 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { PublicationService } from '../../../services/publication/publication.service';
+import { UserService } from '../../../services/user/user.service';
 
 @Component({
   selector: 'app-comment-modal',
@@ -15,10 +16,11 @@ export class CommentModalComponent {
 
   @Input() comments: any[] = [];
   @Input() publicationId = '';
+  @Input() currentUserId = '';
   @Output() close = new EventEmitter<void>();
   messageText = '';
 
-  constructor(private publicationService: PublicationService) {}
+  constructor(private publicationService: PublicationService, private userService: UserService) {}
 
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent): void {
@@ -37,6 +39,13 @@ export class CommentModalComponent {
      this.publicationService.sendComment(this.publicationId, this.messageText).subscribe(
        response => {
          console.log('Comentario enviado:', response);
+         const newComment = {
+          _id: response.comment._id, 
+          text: this.messageText,
+          createdAt: new Date(),
+          user: this.userService.getMyUser()
+        };
+        this.comments.push(newComment);
          this.messageText = '';
        },
        error => {
@@ -45,6 +54,7 @@ export class CommentModalComponent {
      );
     
   }
+  
 
   deleteComment(commentId: string): void {
     this.publicationService.deleteComment(commentId).subscribe(
@@ -52,12 +62,7 @@ export class CommentModalComponent {
         const comment = this.comments.find(c => c._id === commentId);
         if (comment) {
           // Cambiar el texto del comentario al instante
-          comment.text = '💬 Este comentario ha sido eliminado.';
-  
-          // Esperar 2 segundos y cerrar el modal automáticamente
-          setTimeout(() => {
-            this.onClose(); // o this.close.emit();
-          }, 2000);
+          comment.text = ' Este comentario ha sido eliminado.';
         }
       },
       error => {

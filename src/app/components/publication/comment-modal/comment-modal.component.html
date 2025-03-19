@@ -25,9 +25,11 @@
               💬 "{{ comment.text }}"
             </div>
           </div>
+          @if(currentUserId === comment.user._id) {
           <button class="delete-btn" (click)="deleteComment(comment._id)" title="Eliminar comentario">
             Eliminar 🗑️
           </button>
+        }
         </div>
       </li>
       }
