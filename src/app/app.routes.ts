@@ -23,6 +23,7 @@ export const routes: Routes = [
     { path: 'edit-publication/:id', loadComponent: () => import('./components/my-publications/edit-publication/edit-publication.component').then(m => m.EditPublicationComponent), canActivate: [isNotAuthenticatedGuard] },
     { path: 'recipes', loadComponent: () => import('./components/publication/publication.component').then(m => m.PublicationComponent), canActivate: [isNotAuthenticatedGuard] },
     { path: 'messages', loadComponent: () => import('./components/messages/messages.component').then(m => m.MessagesComponent), canActivate: [isNotAuthenticatedGuard] },
+    { path: 'wordle', loadComponent: () => import('./components/wordle/wordle.component').then(m => m.WordleComponent) },
     { path: '**', redirectTo: '' } // Redirige cualquier ruta no válida a la página principal
 
 ];
