@@ -48,7 +48,7 @@ export class PublicationService {
     );
   }
 
-  getMyPublications(): Observable<any> {
+  getMyPublications(userId: string | undefined): Observable<any> {
     const token = this.userService.getToken();
     if (!token) {
       return throwError(() => new Error('No token available'));
@@ -57,7 +57,7 @@ export class PublicationService {
       'Authorization': token.trim()
     });
 
-    return this.http.get(this.url + 'getmypublications', { headers }).pipe(
+    return this.http.get(this.url + 'getpublications/' + userId, { headers }).pipe(
       catchError((error) => {
         return throwError(() => error);
       })

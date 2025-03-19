@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PublicationService } from '../../services/publication/publication.service';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-my-publications',
@@ -15,6 +16,7 @@ export class MyPublicationsComponent implements OnInit {
 
   publications: any[] = [];
   selectedPublication: any = null;
+  creatorPublications: boolean = false;
 
   creatingPublication = false;
   newPublication: any = {};
@@ -23,14 +25,23 @@ export class MyPublicationsComponent implements OnInit {
   categoryOptions: string[] = ['Desayuno', 'Almuerzo', 'Cena', 'Postre', 'Snack', 'Vegano', 'Vegetariano', 'Sin Gluten', 'Sin Lactosa'];
   tagOptions: string[] = ['Rápido','Vegetariano','Dulce', 'Fácil', 'Saludable', 'Económico', 'Internacional', 'Gourmet', 'Tradicional', 'Fiesta', 'Navidad', 'Halloween', 'San Valentín', 'Verano', 'Invierno', 'Otoño', 'Primavera','Internacional','Sin Gluten','Sin Lactosa','Vegano','Vegetariano'];
 
-  constructor(private publicationService: PublicationService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private publicationService: PublicationService, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     this.loadMyPublications();
   }
 
   loadMyPublications(): void {
-    this.publicationService.getMyPublications().subscribe({
+    var id: string | null = this.route.snapshot.paramMap.get('userId');
+    console.log(id);
+    var userId: string | undefined = "";
+    if(id === null) {
+      userId = this.userService.getMyUser()?._id;
+      this.creatorPublications = true; 
+    }
+    else userId = id;
+
+    this.publicationService.getMyPublications(userId).subscribe({
       next: (response: any) => {
         this.publications = response.publications;
       },

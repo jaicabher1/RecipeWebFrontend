@@ -19,6 +19,7 @@ export const routes: Routes = [
     { path: 'followers', loadComponent: () => import('./components/followers/followers.component').then(m => m.FollowersComponent), canActivate: [isNotAuthenticatedGuard] },
     { path: 'followings', loadComponent: () => import('./components/followings/followings.component').then(m => m.FollowingsComponent), canActivate: [isNotAuthenticatedGuard] },
     { path: 'my-publications', loadComponent: () => import('./components/my-publications/my-publications.component').then(m => m.MyPublicationsComponent), canActivate: [isNotAuthenticatedGuard] },
+    { path: 'publications/:userId', loadComponent: () => import('./components/my-publications/my-publications.component').then(m => m.MyPublicationsComponent), canActivate: [isNotAuthenticatedGuard] },
     { path: 'edit-publication/:id', loadComponent: () => import('./components/my-publications/edit-publication/edit-publication.component').then(m => m.EditPublicationComponent), canActivate: [isNotAuthenticatedGuard] },
     { path: 'recipes', loadComponent: () => import('./components/publication/publication.component').then(m => m.PublicationComponent), canActivate: [isNotAuthenticatedGuard] },
     { path: 'messages', loadComponent: () => import('./components/messages/messages.component').then(m => m.MessagesComponent), canActivate: [isNotAuthenticatedGuard] },

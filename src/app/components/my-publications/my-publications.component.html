@@ -1,5 +1,5 @@
+@if(creatorPublications){
 <button class="new-publication-btn" (click)="openNewPublication()">➕ Nueva Publicación</button>
-
 @if (creatingPublication) {
 <div class="modal-background">
   <div class="modal-container">
@@ -74,6 +74,7 @@
 </div>
 }
 
+}
 <div class="publications-container">
   <div class="publication-card" *ngFor="let publication of publications">
     <div class="publication-body">
@@ -107,6 +108,7 @@
 
     <div class="modal-background" *ngIf="selectedPublication">
       <div class="modal-container">
+        <button (click)="closeDetail()" class="close-btn">✖️</button>
         <h2>{{ selectedPublication.title }}</h2>
         <table>
           <tr>
@@ -138,10 +140,12 @@
             <td><span *ngFor="let tag of selectedPublication.tags" class="tag">{{ tag }}</span></td>
           </tr>
         </table>
-        <button (click)="editPublication(selectedPublication)" class="edit-btn">Editar ✏️</button>
-        <button (click)="deletePublication(selectedPublication._id)" class="delete-btn">Eliminar 🗑️</button>
-        <button (click)="closeDetail()" class="close-btn">Cerrar ❌</button>
+        @if(creatorPublications){
+          <button (click)="editPublication(selectedPublication)" class="edit-btn">Editar ✏️</button>
+          <button (click)="deletePublication(selectedPublication._id)" class="delete-btn">Eliminar 🗑️</button>
+        }
       </div>
     </div>
+    
   </div>
 </div>

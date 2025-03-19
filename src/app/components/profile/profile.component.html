@@ -17,7 +17,7 @@
         <button class="counter-btn" [disabled]="!counters.showButton" (click)="onFollowers()">
           <span>{{ counters.followed }}</span> Seguidores
         </button>
-        <button class="counter-btn" [disabled]="!counters.showButton" (click)="onMyPublications()">
+        <button class="counter-btn" (click)="onMyPublications()">
           <span>{{ counters.publications }} Publicaciones</span>
         </button>
       </div>
