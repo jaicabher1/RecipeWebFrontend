@@ -120,7 +120,7 @@ export class UserService {
   }
 
 
-  getFollowers(userId: string): Observable<any> {
+  getFollowers(userId: string | undefined): Observable<any> {
     const token = this.getToken();
     if (!token) {
       return throwError(() => new Error('No token available'));
@@ -136,7 +136,7 @@ export class UserService {
     );
   }
 
-  getFollowings(userId: string): Observable<any> {
+  getFollowings(userId: string | undefined): Observable<any> {
     const token = this.getToken();
     if (!token) {
       return throwError(() => new Error('No token available'));

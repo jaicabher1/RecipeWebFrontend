@@ -1,0 +1,26 @@
+<div class="dashboard">
+  <h2 class="dashboard-title">Publicaciones por Mes</h2>
+  
+  <!-- Filtro por categoría -->
+  <div class="filter-section">
+    <label for="categoryFilter">Filtrar por categoría:</label>
+    <select id="categoryFilter" (change)="onCategoryChange($event)">
+      <option value="all">Todas las categorías</option>
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+  </div>
+
+  <!-- Filtro por año -->
+  <div class="filter-section">
+    <label for="yearFilter">Filtrar por año:</label>
+    <select id="yearFilter" (change)="onYearChange($event)">
+      <option value="all">Todos los años</option>
+      <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+    </select>
+  </div>
+
+  <!-- Contenedor del gráfico -->
+  <div class="chart-container">
+    <canvas id="MyChart" aria-label="Gráfico de publicaciones por mes" role="img"></canvas>
+  </div>
+</div>
