@@ -162,35 +162,40 @@ export class DashboardsComponent implements OnInit {
   }
 
   createFollowersChart() {
-    var followersData = this.processFollowersData(this.followers);
+    // Obtener todos los años posibles (desde el año mínimo hasta el año máximo)
+    const allYears = this.getAllYears([...this.followers, ...this.following]);
+  
+    // Procesar los datos de seguidores y seguidos
+    const followersData = this.processFollowersData(this.followers, allYears);
     console.log('Datos de seguidores:', followersData); // Depuración
-    var followingData = this.processFollowersData(this.following);
+    const followingData = this.processFollowersData(this.following, allYears);
     console.log('Datos de seguidos:', followingData); // Depuración
-
-    console.log('Etiquetas (labels):', followingData.labels); // Verifica las etiquetas
-    console.log('Datos de seguidores:', followersData.data); // Verifica los datos de seguidores
-    console.log('Datos de seguidos:', followingData.data); // Verifica los datos de seguidos
-
-    var ctx = document.getElementById('FollowersChart') as HTMLCanvasElement;
+  
+    // Combinar las etiquetas de followersData y followingData
+    const combinedLabels = [...new Set([...followersData.labels, ...followingData.labels])].sort();
+  
+    console.log('Etiquetas combinadas:', combinedLabels); // Depuración
+  
+    const ctx = document.getElementById('FollowersChart') as HTMLCanvasElement;
     if (this.followersChart) {
       this.followersChart.destroy(); // Destruye el gráfico anterior si existe
     }
-
+  
     this.followersChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: followingData.labels, // Usa las etiquetas generadas
+        labels: combinedLabels, // Usa las etiquetas combinadas
         datasets: [
           {
             label: 'Seguidores',
-            data: followersData.data, // Usa los datos de seguidores
+            data: followersData.data, // Usa los datos de seguidores ajustados
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 2,
             fill: false
           },
           {
             label: 'Seguidos',
-            data: followingData.data, // Usa los datos de seguidos
+            data: followingData.data, // Usa los datos de seguidos ajustados
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 2,
             fill: false
@@ -230,19 +235,19 @@ export class DashboardsComponent implements OnInit {
     });
   }
 
-  processFollowersData(data: any[]) {
+  processFollowersData(data: any[], allYears: number[]): { labels: string[], data: number[] } {
     // Verifica si los datos son un array
     if (Array.isArray(data)) {
       console.log('Datos a procesar:', data); // Depuración
-      let yearCounts:any = {};
-
+      let yearCounts: { [key: number]: number } = {};
+  
       // Itera sobre el array
       data.forEach((item: any) => {
         // Verifica que 'createdAt' esté presente y sea una fecha válida
         if (item.createdAt) {
           const date = new Date(item.createdAt);
           if (!isNaN(date.getTime())) { // Verifica si la fecha es válida
-            let year = date.getFullYear();
+            const year = date.getFullYear();
             if (!yearCounts[year]) {
               yearCounts[year] = 0;
             }
@@ -254,16 +259,57 @@ export class DashboardsComponent implements OnInit {
           console.error('El campo "createdAt" no está presente en el registro:', item);
         }
       });
-
+  
+      // Asegurarse de que todos los años tengan un valor (incluso si es 0)
+      allYears.forEach(year => {
+        if (!yearCounts[year]) {
+          yearCounts[year] = 0; // Si no hay registros para este año, establecer el valor en 0
+        }
+      });
+  
       // Genera las etiquetas (años) y los datos (cantidad de seguidores/seguidos por año)
-      var labels = Object.keys(yearCounts).sort();
-      var counts = labels.map(year => yearCounts[parseInt(year)]);
-
+      const labels = Object.keys(yearCounts).sort();
+      const counts = labels.map(year => yearCounts[parseInt(year)]);
+  
+      console.log('Datos procesados:', { labels, data: counts }); // Depuración
       return { labels, data: counts };
     } else {
       console.error('Los datos no son un array:', data);
       return { labels: [], data: [] };
     }
+  }
+  
+  // Método para obtener todos los años posibles (desde el año mínimo hasta el año máximo)
+  getAllYears(data: any[]): number[] {
+    const years = new Set<number>();
+  
+    // Obtener el año mínimo y máximo de los datos
+    data.forEach((item: any) => {
+      if (item.createdAt) {
+        const date = new Date(item.createdAt);
+        if (!isNaN(date.getTime())) {
+          const year = date.getFullYear();
+          years.add(year);
+        }
+      }
+    });
+  
+    // Si no hay datos, devolver un array vacío
+    if (years.size === 0) {
+      return [];
+    }
+  
+    // Obtener el año mínimo y máximo
+    const minYear = Math.min(...Array.from(years));
+    const maxYear = Math.max(...Array.from(years));
+  
+    // Generar un array con todos los años desde el mínimo hasta el máximo
+    const allYears = [];
+    for (let year = minYear; year <= maxYear; year++) {
+      allYears.push(year);
+    }
+  
+    return allYears;
   }
 
   onCategoryChange(event: Event) {
