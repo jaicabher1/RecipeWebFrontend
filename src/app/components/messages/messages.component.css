@@ -1,9 +1,22 @@
-.messages-container {
+/* Contenedor principal ocupa toda la altura del viewport */
+.messages-layout {
   display: flex;
-  height: 800px;
+  flex-direction: column;
+  height: 1000px;
   background-color: #f8f9fa;
 }
 
+/* Área principal de mensajes: sidebar + chat */
+.messages-container {
+  flex: 1;
+  display: flex;
+  background-color: #f8f9fa;
+  /* Elimina cualquier altura fija */
+}
+
+/* =========================== */
+/*  Sidebar: Lista de Usuarios */
+/* =========================== */
 .user-list {
   width: 300px;
   border-right: 1px solid #ddd;
@@ -28,6 +41,28 @@
   margin: 0;
 }
 
+.user-list-header {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.user-list-header button {
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.user-list-header button:hover {
+  background-color: #0088cc;
+}
+
+/* Tarjeta de usuario */
 .user-card {
   display: flex;
   align-items: center;
@@ -72,33 +107,29 @@
   margin-top: 2px;
 }
 
+/* =========================== */
+/*  Área de Chat              */
+/* =========================== */
 .chat-container {
-  flex-grow: 1;
+  flex: 1;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-.user-list-header {
-  padding: 10px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
+/* Opcional: placeholder cuando no hay chat seleccionado */
+.no-chat-placeholder {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 1.2rem;
 }
 
-.user-list-header button {
-  background-color: #00aaff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
-}
-
-.user-list-header button:hover {
-  background-color: #0088cc;
-}
-
+/* =========================== */
+/*  Modal de Nuevo Chat       */
+/* =========================== */
 .new-chat-modal-backdrop {
   position: fixed;
   top: 0;
@@ -161,6 +192,9 @@
   resize: vertical;
 }
 
+/* =========================== */
+/*  Botones del Modal         */
+/* =========================== */
 /* Botón Enviar */
 .modal-btn-send {
   background-color: #00aaff;
@@ -197,4 +231,3 @@
 .modal-btn-cancel:hover {
   background-color: #bbbbbb;
 }
-

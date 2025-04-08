@@ -88,8 +88,8 @@ export class MessagesComponent implements OnInit {
       },
       error => console.error('Error cargando usuarios', error)
     );
-  }  
-  
+  }
+
   openNewChatModal(): void {
     this.showNewChatModal = true;
     this.newChatSearch = '';
@@ -127,7 +127,27 @@ export class MessagesComponent implements OnInit {
     );
   }
 
+  get filteredAllUsers(): any[] {
+    // Texto de búsqueda
+    const searchTerm = this.newChatSearch.toLowerCase().trim();
+
+    // 1) Excluimos a los usuarios con los que ya hay chat
+    const usersWithoutChat = this.allUsers.filter(u =>
+      !this.filteredUsers.some(fu => fu._id === u._id)
+    );
+
+    // 2) Filtramos por coincidencia en el texto buscado
+    return usersWithoutChat.filter(u => {
+      const fullName = (u.name + ' ' + u.surname).toLowerCase();
+      const nick = (u.nick || '').toLowerCase();
+
+      return fullName.includes(searchTerm) || nick.includes(searchTerm);
+    });
+  }
 
 
+  trackByUserId(index: number, user: any): string {
+    return user._id;
+  }
 }
 

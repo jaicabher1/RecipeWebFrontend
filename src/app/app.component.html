@@ -11,11 +11,10 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/"><i class="bi bi-house-door"></i> Home</a></li>
           <li class="nav-item"><a class="nav-link" href="/wordle"><i class="bi bi-keyboard"></i> Wordle</a></li>
           @if(userService.isAuthenticated()) {
-          <li class="nav-item"><a class="nav-link" href="/"><i class="bi bi-house-door"></i> Home</a></li>
           <li class="nav-item"><a class="nav-link" href="/recipes"><i class="bi bi-list"></i> Recetas</a></li>
-          <li class="nav-item"><a class="nav-link" href="/favorites"><i class="bi bi-heart"></i> Favoritos</a></li>
           <li class="nav-item"><a class="nav-link" href="/messages"><i class="bi bi-chat-dots"></i> Chats</a></li>
           <a class="nav-link" (click)="userService.logout()" style="cursor: pointer;">
             <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
