@@ -5,19 +5,18 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   max-width: 100%;
   margin: 0 auto;
+  text-align: center;
 }
 
 .dashboard-title {
   font-size: 2rem;
   color: #333;
   margin-bottom: 1.5rem;
-  text-align: center;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 .filter-section {
   margin-bottom: 1rem;
-  text-align: center;
 }
 
 .filter-section label {
@@ -39,12 +38,12 @@
 .charts-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem; /* Espacio entre las gráficas */
+  gap: 2rem;
   justify-content: space-between;
 }
 
 .chart-container {
-  flex: 1 1 calc(50% - 1rem); /* Cada gráfica ocupa la mitad del espacio menos el gap */
+  flex: 1 1 calc(50% - 1rem);
   height: 400px;
   position: relative;
   background-color: #f8f9fa;
@@ -57,10 +56,9 @@
   font-size: 1.5rem;
   color: #333;
   margin-bottom: 1rem;
-  text-align: center;
 }
 
 canvas {
-  width: 100% !important;
-  height: 100% !important;
+  width: 100%;
+  height: 100%;
 }

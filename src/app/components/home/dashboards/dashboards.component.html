@@ -9,7 +9,7 @@
       <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
     </select>
   </div>
-
+  
   <!-- Filtro por año -->
   <div class="filter-section">
     <label for="yearFilter">Filtrar por año:</label>
@@ -18,16 +18,16 @@
       <option *ngFor="let year of years" [value]="year">{{ year }}</option>
     </select>
   </div>
-
-  <!-- Contenedor de gráficas en paralelo -->
+  
+  <!-- Contenedor de gráficas -->
   <div class="charts-container">
-    <!-- Contenedor del gráfico de publicaciones -->
+    <!-- Gráfico de publicaciones por Mes -->
     <div class="chart-container">
       <h3>Publicaciones por Mes</h3>
       <canvas id="MyChart" aria-label="Gráfico de publicaciones por mes" role="img"></canvas>
     </div>
-
-    <!-- Contenedor del gráfico de seguidores y seguidos -->
+    
+    <!-- Gráfico de seguidores y seguidos -->
     <div class="chart-container">
       <h3>Crecimiento de Seguidores y Seguidos</h3>
       <canvas id="FollowersChart" aria-label="Gráfico de seguidores y seguidos" role="img"></canvas>
