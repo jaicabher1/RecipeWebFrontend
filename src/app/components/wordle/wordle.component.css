@@ -4,10 +4,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', sans-serif;
-  background-color: #e3f2fd; /* azul claro */
+  background-color: #e3f2fd;
 }
 
-/* Contenedor principal del juego */
+/* Contenedor principal */
 .wordle {
   max-width: 600px;
   margin: 3rem auto;
@@ -18,10 +18,10 @@ body {
   text-align: center;
 }
 
-/* Título principal */
+/* Título */
 .wordle-title {
   font-size: 2rem;
-  color: #0d47a1; /* azul oscuro */
+  color: #0d47a1;
   margin-bottom: 2rem;
   font-weight: 700;
 }
@@ -30,7 +30,7 @@ body {
   font-size: 1.5rem;
 }
 
-/* Tablero */
+/* ===== TABLERO ===== */
 .board {
   display: grid;
   gap: 10px;
@@ -57,7 +57,7 @@ body {
   background-color: #fff;
 }
 
-/* Estados de letras */
+/* Colores de letras en el tablero */
 .correct {
   background-color: #66bb6a;
   color: white;
@@ -76,7 +76,7 @@ body {
   border-color: #90a4ae;
 }
 
-/* Teclado */
+/* ===== TECLADO ===== */
 .keyboard {
   display: flex;
   flex-direction: column;
@@ -96,6 +96,7 @@ body {
   gap: 10px;
 }
 
+/* Botón de letra */
 .keyboard button {
   width: 42px;
   height: 42px;
@@ -103,16 +104,11 @@ body {
   font-weight: 600;
   border: none;
   border-radius: 6px;
-  background-color: #bbdefb;
-  color: #0d47a1;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
-.keyboard button:hover {
-  background-color: #90caf9;
-}
-
+/* Botones anchos (ENTER, BORRAR) */
 .keyboard button.wide {
   width: auto;
   padding: 0 16px;
@@ -123,4 +119,29 @@ body {
 
 .keyboard button.wide:hover {
   background-color: #0d47a1;
+}
+
+/* ===== COLORES DINÁMICOS DEL TECLADO ===== */
+.keyboard button.correct {
+  background-color: #66bb6a;
+  color: white;
+}
+
+.keyboard button.present {
+  background-color: #ffa726;
+  color: white;
+}
+
+.keyboard button.absent {
+  background-color: #90a4ae;
+  color: white;
+}
+
+.keyboard button.default {
+  background-color: #bbdefb;
+  color: #0d47a1;
+}
+
+.keyboard button:hover:not(.wide) {
+  filter: brightness(1.1);
 }
