@@ -1,6 +1,9 @@
 @if(creatorPublications){
-<button class="new-publication-btn" (click)="openNewPublication()">➕ Nueva Publicación</button>
-@if (creatingPublication) {
+  <br/>
+  <div class="new-publication-wrapper">
+    <button class="new-publication-btn" (click)="openNewPublication()">➕ Nueva Publicación</button>
+  </div>
+    @if (creatingPublication) {
 <div class="modal-background">
   <div class="modal-container">
     <h2>Crear nueva publicación 📄</h2>
@@ -67,7 +70,7 @@
 
       <div class="button-group">
         <button type="submit" class="save-btn">Guardar ✅</button>
-        <button type="button" class="close-btn" (click)="closeNewPublication()">Cancelar ❌</button>
+        <button type="button" class="close-btn" (click)="closeNewPublication()">❌</button>
       </div>
     </form>
   </div>
@@ -97,7 +100,6 @@
           <p>{{ publication.steps }}</p>
         </div>
         <div class="footer">
-          <span class="views">👁️ {{ publication.views }} vistas</span>
           <span class="difficulty">Nivel: {{ publication.difficulty }}</span>
           <span class="prep-time">⏳ {{ publication.prepTime }} min</span>
         </div>
@@ -122,10 +124,6 @@
           <tr *ngIf="selectedPublication.steps">
             <td><strong>Pasos:</strong></td>
             <td>{{ selectedPublication.steps }}</td>
-          </tr>
-          <tr>
-            <td><strong>Vistas:</strong></td>
-            <td>{{ selectedPublication.views }}</td>
           </tr>
           <tr>
             <td><strong>Dificultad:</strong></td>

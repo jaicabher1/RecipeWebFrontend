@@ -1,45 +1,75 @@
-/* Contenedor general de todas las publicaciones */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+}
+
+/* Contenedor general */
 .publications-container {
   padding: 20px;
-  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: auto;
 }
 
-/* Tarjeta individual */
-.publication-card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  padding: 20px;
-}
-
-/* Cuerpo principal: dos columnas en pantallas grandes, en columna en pantallas pequeñas */
-.publication-body {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
-}
-
-/* Columna IZQUIERDA: Imagen */
-.publication-image {
-  width: 300px;
-  height: 300px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
+/* === BOTÓN NUEVA PUBLICACIÓN CENTRADO === */
+.new-publication-wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.new-publication-btn {
+  background: linear-gradient(90deg, #007BFF, #0056b3);
+  color: white;
+  padding: 14px 24px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.new-publication-btn:hover {
+  background: linear-gradient(90deg, #0056b3, #003f8a);
+  transform: translateY(-2px);
+}
+
+/* Tarjeta de publicación */
+.publication-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Layout imagen + contenido */
+.publication-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Imagen */
+.publication-image {
+  flex: 0 0 300px;
+  height: 280px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #ddd;
 }
 
 .publication-image .image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 10px;
 }
 
-/* Columna DERECHA: Contenido */
+/* Contenido */
 .publication-details {
   flex: 1;
   display: flex;
@@ -51,21 +81,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 12px;
   flex-wrap: wrap;
-  margin-bottom: 10px;
+  gap: 10px;
 }
 
 .title {
-  font-size: 1.4rem;
-  font-weight: bold;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #212121;
   margin: 0;
 }
 
 .category {
-  background-color: #ff9800;
+  background-color: #007BFF;
   color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 /* Tags */
@@ -74,18 +108,22 @@
 }
 
 .tag {
-  background-color: #ffcc80;
-  color: #fff;
-  padding: 5px 10px;
+  background-color: #e0f0ff;
+  color: #007BFF;
+  padding: 5px 12px;
   border-radius: 20px;
-  margin-right: 8px;
-  display: inline-block;
   font-size: 0.9rem;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  display: inline-block;
+  font-weight: 600;
 }
 
 /* Descripción */
-.description {
-  margin-bottom: 10px;
+.description p {
+  font-size: 1.2rem;
+  color: #444;
+  margin: 0;
 }
 
 /* Pasos */
@@ -93,221 +131,232 @@
   margin-top: 10px;
 }
 
+.steps h4 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  color: #007BFF;
+}
+
+.steps p {
+  font-size: 1.2rem;
+  color: #333;
+}
+
 /* Footer */
 .footer {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  font-size: 0.9rem;
-  margin-top: auto;
-}
-
-.views, .difficulty, .prep-time {
-  font-weight: bold;
-  color: #ff5722;
+  margin-top: 1.5rem;
   font-size: 1.1rem;
+  color: #444;
+  font-weight: 600;
 }
 
-/* ----------- RESPONSIVE DESIGN ----------- */
-
-/* Ajuste para tablets y pantallas medianas */
-@media (max-width: 1024px) {
-  .publication-body {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-  }
-
-  .publication-image {
-      width: 250px;
-      height: 250px;
-  }
-
-  .footer {
-      justify-content: center;
-      gap: 15px;
-  }
+.difficulty {
+  color: #4CAF50;
 }
 
-/* Ajuste para móviles */
-@media (max-width: 600px) {
-  .publications-container {
-      padding: 10px;
-  }
-
-  .publication-card {
-      padding: 15px;
-  }
-
-  .publication-image {
-      width: 100%;
-      height: auto;
-  }
-
-  .title {
-      font-size: 1.2rem;
-  }
-
-  .tag {
-      font-size: 0.8rem;
-  }
-
-  .footer {
-      flex-direction: column;
-      text-align: center;
-  }
-
-  .views, .difficulty, .prep-time {
-      font-size: 1rem;
-  }
+.prep-time {
+  color: #007BFF;
 }
 
-/* Ventana emergente (modal) */
+/* Botón detalles */
+.detail-button {
+  margin-top: 1rem;
+  padding: 10px 20px;
+  background-color: #455a64;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.detail-button:hover {
+  background-color: #37474f;
+}
+
+/* Modal */
 .modal-background {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.7);
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 1000;
 }
 
 .modal-container {
-  background-color: white;
-  padding: 25px;
-  border-radius: 10px;
-  width: 500px;
-  max-width: 90%;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-.modal-container table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 15px;
-}
-
-.modal-container td {
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
-}
-
-.close-btn {
-  padding: 8px 15px;
-  background-color: #f44336;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.close-btn:hover {
-  opacity: 0.9;
-}
-
-/* Tags dentro del modal */
-.modal-container .tag {
-  background-color: #ffcc80;
-  color: white;
-  padding: 3px 8px;
-  border-radius: 15px;
-  margin-right: 4px;
-  display: inline-block;
-  font-size: 0.85rem;
-}
-.edit-btn {
-  background-color: #ff9800;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 15px;
-  cursor: pointer;
-  margin-right: 5px;
-  transition: opacity 0.3s;
-}
-
-.edit-btn:hover {
-  opacity: 0.9;
-}
-.delete-btn {
-  background-color: #f44336;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 15px;
-  cursor: pointer;
-  margin-right: 5px;
-  transition: opacity 0.3s;
-}
-
-.delete-btn:hover {
-  opacity: 0.9;
-}
-.modal-background {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.modal-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   position: relative;
-  background: #fff;
-  padding: 25px;
-  border-radius: 10px;
-  width: 500px;
-  max-width: 95%;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-container h2 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: #007BFF;
+  text-align: center;
+  font-weight: 700;
 }
 
 .form-group {
-  margin-bottom: 12px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 16px;
 }
 
-label {
-  font-weight: bold;
-  margin-bottom: 5px;
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
 }
 
-input, textarea, select {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  padding: 10px 12px;
   font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: border-color 0.2s ease;
 }
 
-.button-group {
-  margin-top: 15px;
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Checkboxes de tags */
+.tag-checkboxes {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-checkboxes label {
+  font-size: 0.95rem;
+  background-color: #e0f0ff;
+  color: #007BFF;
+  padding: 6px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.tag-checkboxes input {
+  accent-color: #007BFF;
+}
+
+/* Botones guardar y cerrar */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
 }
 
 .save-btn {
   background-color: #4CAF50;
   color: white;
   border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+  padding: 10px 20px;
+  font-weight: 600;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.save-btn:hover {
+  background-color: #43a047;
+}
+
+.close-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.close-btn:hover {
+  background-color: #e53935;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Botones modal */
+.edit-btn, .delete-btn {
+  padding: 10px 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background-color: #2196f3;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #1976d2;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #e53935;
 }
 
 .close-btn {
   position: absolute;
   top: 10px;
-  right: 10px;
-  background: transparent;
+  right: 12px;
+  font-size: 22px;
+  background: none;
   border: none;
+  color: #888;
   cursor: pointer;
-  font-size: 20px;
-  color: #555;
   transition: color 0.3s ease;
 }
 
@@ -315,12 +364,21 @@ input, textarea, select {
   color: #000;
 }
 
-.new-publication-btn {
-  margin-bottom: 15px;
-  background-color: #2196f3;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
+/* Responsive */
+@media (max-width: 768px) {
+  .publication-body {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .publication-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .footer {
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+  }
 }
