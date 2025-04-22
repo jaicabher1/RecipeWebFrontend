@@ -25,47 +25,24 @@
 
     <table class="profile-table">
       <tbody>
-        <tr>
-          <td><strong>Nombre:</strong></td>
-          <td>{{ user.name }}</td>
-        </tr>
-        <tr>
-          <td><strong>Apellido:</strong></td>
-          <td>{{ user.surname }}</td>
-        </tr>
-        <tr>
-          <td><strong>Email:</strong></td>
-          <td>{{ user.email }}</td>
-        </tr>
-        <tr>
-          <td><strong>Nick:</strong></td>
-          <td>{{ user.nick }}</td>
-        </tr>
+        <tr><td>👤 <strong>Nombre:</strong></td><td>{{ user.name }}</td></tr>
+        <tr><td>🧾 <strong>Apellido:</strong></td><td>{{ user.surname }}</td></tr>
+        <tr><td>📧 <strong>Email:</strong></td><td>{{ user.email }}</td></tr>
+        <tr><td>🔖 <strong>Nick:</strong></td><td>{{ user.nick }}</td></tr>
         @if (user.bio) {
-          <tr>
-            <td><strong>Biografía:</strong></td>
-            <td>{{ user.bio }}</td>
-          </tr>
+          <tr><td>📝 <strong>Biografía:</strong></td><td>{{ user.bio }}</td></tr>
         }
         @if (user.location) {
-          <tr>
-            <td><strong>Ubicación:</strong></td>
-            <td>{{ user.location }}</td>
-          </tr>
+          <tr><td>📍 <strong>Ubicación:</strong></td><td>{{ user.location }}</td></tr>
         }
         <tr>
-          <td><strong>Verificado:</strong></td>
-          <td>
-            <span [ngClass]="user.isVerified ? 'text-success' : 'text-danger'">
-              {{ user.isVerified ? '✅ Sí' : '❌ No' }}
-            </span>
-          </td>
+          <td>✅ <strong>Verificado:</strong></td>
+          <td><span [ngClass]="user.isVerified ? 'verified' : 'not-verified'">
+            {{ user.isVerified ? '✅ Sí' : '❌ No' }}
+          </span></td>
         </tr>
         @if (user.phoneNumber) {
-          <tr>
-            <td><strong>Teléfono:</strong></td>
-            <td>{{ user.phoneNumber }}</td>
-          </tr>
+          <tr><td>📞 <strong>Teléfono:</strong></td><td>{{ user.phoneNumber }}</td></tr>
         }
       </tbody>
     </table>

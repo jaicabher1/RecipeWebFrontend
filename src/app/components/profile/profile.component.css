@@ -1,77 +1,116 @@
-.profile-container {
-  max-width: 700px;
-  margin: auto;
-  padding: 20px;
-  text-align: center;
-  font-family: Arial, sans-serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-.profile-image {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+.profile-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  background-color: #fff;
+  text-align: center;
 }
 
 .profile-title {
-  margin-bottom: 20px;
-  font-size: 28px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 1.5rem;
 }
 
+.profile-image-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.profile-image {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #007BFF;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Estadísticas */
 .profile-counters {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .counter-btn {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
+  background-color: #e3f2fd;
+  color: #007BFF;
+  border: 2px solid #007BFF;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.8rem 1.5rem;
   cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .counter-btn:hover:not(:disabled) {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .counter-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: default;
 }
 
+/* Tabla de información del usuario */
 .profile-table {
   width: 100%;
-  margin-bottom: 20px;
+  margin: auto;
   border-collapse: collapse;
+  text-align: left;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
 }
 
 .profile-table td {
-  padding: 10px;
+  padding: 12px 10px;
   border-bottom: 1px solid #eee;
 }
 
-.follow-buttons {
-  text-align: center;
-  margin-top: 20px;
+.profile-table td:first-child {
+  font-weight: 600;
+  color: #444;
+  width: 40%;
 }
 
-.follow-btn, .unfollow-btn {
-  padding: 8px 15px;
-  border-radius: 5px;
-  cursor: pointer;
+/* Colores para verificación */
+.text-success {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.text-danger {
+  color: #c62828;
+  font-weight: 600;
+}
+
+/* Botones seguir/dejar de seguir */
+.follow-buttons {
+  margin-top: 2rem;
+}
+
+.follow-btn,
+.unfollow-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
   border: none;
-  transition: opacity 0.3s;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
 
 .follow-btn {
-  background-color: #42a5f5;
+  background-color: #2196f3;
   color: white;
 }
 
@@ -80,15 +119,20 @@
   color: white;
 }
 
-.follow-btn:hover, .unfollow-btn:hover {
-  opacity: 0.8;
+.follow-btn:hover {
+  background-color: #1e88e5;
 }
 
+.unfollow-btn:hover {
+  background-color: #e53935;
+}
+
+/* Mensajes de respuesta al seguir */
 .follow-message {
-  margin-top: 10px;
-  padding: 8px;
-  border-radius: 5px;
-  font-weight: bold;
+  margin-top: 1rem;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: 500;
 }
 
 .alert-success {
@@ -101,17 +145,19 @@
   color: #c62828;
 }
 
+/* Botón editar perfil */
 .edit-profile-button {
-  text-align: center;
-  margin-top: 25px;
+  margin-top: 2.5rem;
 }
 
 .edit-btn {
   background-color: #ff9800;
   color: white;
-  padding: 8px 15px;
+  padding: 10px 20px;
+  border-radius: 8px;
   border: none;
-  border-radius: 5px;
+  font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -120,8 +166,9 @@
   background-color: #f57c00;
 }
 
+/* Error si no se carga el usuario */
 .profile-error {
-  text-align: center;
-  color: red;
+  color: #c62828;
   font-weight: bold;
+  margin-top: 2rem;
 }
