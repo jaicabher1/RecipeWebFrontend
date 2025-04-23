@@ -82,7 +82,7 @@
   <div class="publication-card" *ngFor="let publication of publications">
     <div class="publication-body">
       <div class="publication-image">
-        <img [src]="publication.image" alt="Receta" class="image">
+        <img [src]="getImageUrl(publication.image)" alt="Receta" class="image">
       </div>
       <div class="publication-details">
         <div class="title-category">

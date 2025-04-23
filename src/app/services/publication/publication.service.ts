@@ -231,7 +231,4 @@ export class PublicationService {
       })
     );
   }
-
-
-
 }

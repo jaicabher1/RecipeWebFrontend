@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-my-publications',
@@ -31,6 +32,13 @@ export class MyPublicationsComponent implements OnInit {
     this.loadMyPublications();
   }
 
+  getImageUrl(imageName: string): string {
+    if (!imageName) {
+      return 'assets/recipes/default-image.jpg'; // Ruta de la imagen por defecto
+    }
+    return `http://localhost:3800/api/get-image-pub/${imageName}`;
+  }
+
   loadMyPublications(): void {
     var id: string | null = this.route.snapshot.paramMap.get('userId');
     console.log(id);
@@ -44,6 +52,7 @@ export class MyPublicationsComponent implements OnInit {
     this.publicationService.getMyPublications(userId).subscribe({
       next: (response: any) => {
         this.publications = response.publications;
+        console.log(this.publications);
       },
       error: (error: any) => {
         console.error('Error in request:', error);
@@ -87,7 +96,7 @@ export class MyPublicationsComponent implements OnInit {
       description: '',
       steps: '',
       difficulty: 'Fácil',
-      prepTime: 0
+      prepTime: 0,
     };
   }
 
