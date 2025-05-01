@@ -13,7 +13,7 @@
             [class.selected]="user._id === selectedUser?._id"
             class="user-card">
           <div class="user-avatar">
-            <img [src]="user.image || 'assets/default-avatar.png'" alt="Avatar de {{user.nick}}" />
+            <img [src]="'http://localhost:3800/api/get-image-user/' + user.image" alt="Imagen de perfil">
           </div>
           <div class="user-info">
             <div class="user-name">{{ user.name }} {{ user.surname }}</div>
