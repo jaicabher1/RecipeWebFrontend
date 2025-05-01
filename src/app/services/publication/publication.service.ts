@@ -231,4 +231,25 @@ export class PublicationService {
       })
     );
   }
+
+  uploadImagePublication(publicationId: string, file: File) {
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+  
+    const formData = new FormData();
+    formData.append('image', file, file.name); // asegúrate de que el nombre sea "image" como en tu backend
+  
+    const headers = new HttpHeaders().set('Authorization', token.trim());
+  
+    return this.http.post(
+      this.url + 'upload-image-pub/' + publicationId,
+      formData,
+      { headers }
+    ).pipe(
+      catchError((error) => throwError(() => error))
+    );
+  }
+  
 }

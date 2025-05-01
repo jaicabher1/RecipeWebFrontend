@@ -63,4 +63,19 @@
   button:hover {
     opacity: 0.9;
   }
+  .current-image {
+    display: block;
+    max-width: 100%;
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin: 10px 0;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .current-image:hover {
+    transform: scale(1.02);
+  }
   

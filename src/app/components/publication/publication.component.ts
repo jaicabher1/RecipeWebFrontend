@@ -44,6 +44,13 @@ export class PublicationComponent implements OnInit {
     this.loadFollowedPublications();
   }
 
+  getImageUrl(imageName: string): string {
+    if (!imageName) {
+      return 'assets/recipes/default-image.jpg'; // Ruta de la imagen por defecto
+    }
+    return `http://localhost:3800/api/get-image-pub/${imageName}`;
+  }
+
   loadFollowedPublications(): void {
     this.publicationService.getFollowedPublications().subscribe(
       (response: { publications: Publication[] }) => {

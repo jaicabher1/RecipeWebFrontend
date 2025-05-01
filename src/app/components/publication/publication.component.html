@@ -19,7 +19,7 @@
 
     <!-- Imagen de la publicación -->
     <div class="publication-image">
-      <img [src]="publication.image || 'assets/default-image.jpg'" alt="Receta" class="image">
+      <img [src]="getImageUrl(publication.image)" alt="Receta" class="image">
     </div>
 
     <!-- Detalles de la publicación -->
