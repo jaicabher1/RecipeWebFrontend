@@ -6,7 +6,7 @@
     <div class="user-info">
       <a [routerLink]="['/profile', publication.user]">
         @if (publication.userModel) {
-        <img [src]="publication.userModel.image || 'assets/users/chef.jpg'" alt="Usuario"
+          <img [src]="'http://localhost:3800/api/get-image-user/' + publication.userModel.image" alt="Imagen de perfil"
           class="user-image clickable-avatar">
         }
       </a>
