@@ -5,13 +5,9 @@
     <div *ngIf="followings && followings.length > 0; else nofollowings" class="followings-list">
       <!-- Iteramos sobre cada seguidor -->
       <div *ngFor="let following of followings" class="following-item">
-        <!-- Imagen/avatar del seguidor (ajusta la propiedad según tu backend) -->
-        <img 
-          [src]="following.followed.image || 'assets/users/chef.jpg'" 
-          alt="Avatar" 
-          class="avatar"
-        />
-  
+        <img [src]="'http://localhost:3800/api/get-image-user/' + following.followed.image" alt="Imagen de perfil"
+        class="avatar">
+
         <!-- Info del seguidor -->
         <div  class="following-info">
           <h3>{{ following.followed.name }}</h3>

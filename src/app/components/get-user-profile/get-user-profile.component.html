@@ -23,11 +23,8 @@
       @for (user of filteredUsers; track user._id) {
         <div class="user-card">
           <a [routerLink]="['/profile', user._id]">
-            <img
-              [src]="user.image || 'assets/default-user.jpg'"
-              alt="Avatar"
-              class="user-avatar"
-            />
+            <img [src]="'http://localhost:3800/api/get-image-user/' + user.image" alt="Imagen de perfil"
+        class="user-avatar">
           </a>
           <div class="user-info-text">
             <h2>{{ user.nick }}</h2>

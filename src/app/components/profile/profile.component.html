@@ -5,7 +5,8 @@
 
     @if (user.image) {
       <div class="profile-image-container">
-        <img [src]="user.image" alt="Imagen de perfil" class="profile-image">
+        <img [src]="'http://localhost:3800/api/get-image-user/' + user.image" alt="Imagen de perfil"
+        class="profile-image">
       </div>
     }
 

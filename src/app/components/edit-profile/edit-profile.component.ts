@@ -86,6 +86,12 @@ export class EditProfileComponent implements OnInit {
       }
     });
   }
+  getProfileImageUrl(): string {
+    return this.user.image
+      ? `http://localhost:3800/api/get-image-user/${this.user.image}`
+      : 'public/assets/user/chef.jpg'; // ruta relativa dentro de Angular
+  }
+  
 
 
 }
