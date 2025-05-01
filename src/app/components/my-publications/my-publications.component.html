@@ -1,9 +1,9 @@
 @if(creatorPublications){
-  <br/>
-  <div class="new-publication-wrapper">
-    <button class="new-publication-btn" (click)="openNewPublication()">➕ Nueva Publicación</button>
-  </div>
-    @if (creatingPublication) {
+<br />
+<div class="new-publication-wrapper">
+  <button class="new-publication-btn" (click)="openNewPublication()">➕ Nueva Publicación</button>
+</div>
+@if (creatingPublication) {
 <div class="modal-background">
   <div class="modal-container">
     <h2>Crear nueva publicación 📄</h2>
@@ -23,8 +23,12 @@
       </div>
 
       <div class="form-group">
-        <label>Ruta imagen (Ej: assets/recipes/imagen.jpg)</label>
-        <input type="text" [(ngModel)]="newPublication.image" name="image" />
+        <!-- Subida de imagen -->
+        <div class="form-group">
+          <label>Imagen</label>
+          <input type="file" (change)="onFileSelected($event)" />
+        </div>
+
       </div>
 
       <div class="form-group">
@@ -139,11 +143,11 @@
           </tr>
         </table>
         @if(creatorPublications){
-          <button (click)="editPublication(selectedPublication)" class="edit-btn">Editar ✏️</button>
-          <button (click)="deletePublication(selectedPublication._id)" class="delete-btn">Eliminar 🗑️</button>
+        <button (click)="editPublication(selectedPublication)" class="edit-btn">Editar ✏️</button>
+        <button (click)="deletePublication(selectedPublication._id)" class="delete-btn">Eliminar 🗑️</button>
         }
       </div>
     </div>
-    
+
   </div>
 </div>
