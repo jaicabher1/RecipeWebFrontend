@@ -25,7 +25,6 @@ export class EditProfileComponent implements OnInit {
     if (currentUserId) {
       this.userService.getUserById(currentUserId).subscribe({
         next: (response) => {
-          console.log(response.user);
           this.user = response.user;
         },
         error: (error) => {

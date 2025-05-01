@@ -166,7 +166,6 @@ export class PublicationService {
 
   deleteLike(publicationId: string): Observable<any> {
     const token = this.userService.getToken();
-    console.log(token);
     if (!token) {
       return throwError(() => new Error('No token available'));
     }
@@ -200,8 +199,7 @@ export class PublicationService {
 
   sendComment(publicationId: string, text: string): Observable<any> {
     const token = this.userService.getToken();
-    console.log(publicationId);
-    console.log(text);
+    
     if (!token) {
       return throwError(() => new Error('No token available'));
     }

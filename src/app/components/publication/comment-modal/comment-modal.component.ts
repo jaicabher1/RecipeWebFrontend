@@ -35,10 +35,8 @@ export class CommentModalComponent {
   }
 
   sendComment(): void {
-    console.log(this.publicationId);
      this.publicationService.sendComment(this.publicationId, this.messageText).subscribe(
        response => {
-         console.log('Comentario enviado:', response);
          const newComment = {
           _id: response.comment._id, 
           text: this.messageText,

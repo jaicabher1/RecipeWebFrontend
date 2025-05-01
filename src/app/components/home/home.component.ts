@@ -18,10 +18,8 @@ export class HomeComponent {
 
     ngOnInit(): void {
       const userId = this.userService.getMyUser()?._id;
-      console.log(userId);
       if (userId) {
         this.userService.getUserById(userId).subscribe((response) => {
-          console.log(response);
           this.userName = response.user ? response.user.name : '';
         });
       }

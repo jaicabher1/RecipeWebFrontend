@@ -46,7 +46,6 @@ export class DashboardsComponent implements OnInit {
 
     this.userService.getFollowers(currentUserId).subscribe({
       next: (response: any) => {
-        console.log('Followers:', response); // Verifica la estructura de los datos
         this.followers = response.follows; // Asigna el array directamente
         this.createFollowersChart();
       }
@@ -54,7 +53,6 @@ export class DashboardsComponent implements OnInit {
 
     this.userService.getFollowings(currentUserId).subscribe({
       next: (response: any) => {
-        console.log('Following:', response); // Verifica la estructura de los datos
         this.following = response.follows; // Asigna el array directamente
         this.createFollowersChart();
       }
@@ -167,15 +165,11 @@ export class DashboardsComponent implements OnInit {
   
     // Procesar los datos de seguidores y seguidos
     const followersData = this.processFollowersData(this.followers, allYears);
-    console.log('Datos de seguidores:', followersData); // Depuración
     const followingData = this.processFollowersData(this.following, allYears);
-    console.log('Datos de seguidos:', followingData); // Depuración
   
     // Combinar las etiquetas de followersData y followingData
     const combinedLabels = [...new Set([...followersData.labels, ...followingData.labels])].sort();
-  
-    console.log('Etiquetas combinadas:', combinedLabels); // Depuración
-  
+    
     const ctx = document.getElementById('FollowersChart') as HTMLCanvasElement;
     if (this.followersChart) {
       this.followersChart.destroy(); // Destruye el gráfico anterior si existe
@@ -238,7 +232,6 @@ export class DashboardsComponent implements OnInit {
   processFollowersData(data: any[], allYears: number[]): { labels: string[], data: number[] } {
     // Verifica si los datos son un array
     if (Array.isArray(data)) {
-      console.log('Datos a procesar:', data); // Depuración
       let yearCounts: { [key: number]: number } = {};
   
       // Itera sobre el array
@@ -271,7 +264,6 @@ export class DashboardsComponent implements OnInit {
       const labels = Object.keys(yearCounts).sort();
       const counts = labels.map(year => yearCounts[parseInt(year)]);
   
-      console.log('Datos procesados:', { labels, data: counts }); // Depuración
       return { labels, data: counts };
     } else {
       console.error('Los datos no son un array:', data);

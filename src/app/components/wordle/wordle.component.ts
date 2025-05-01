@@ -31,7 +31,6 @@ export class WordleComponent implements OnInit {
       const date = new Date().toLocaleDateString();
       const randomIndex = Math.floor(this.seededRandom(date) * words.length);
       this.word = words[randomIndex].toUpperCase();
-      console.log('Palabra del día:', this.word);
     });
   }
 
