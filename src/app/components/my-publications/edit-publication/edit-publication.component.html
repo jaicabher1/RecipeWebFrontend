@@ -6,7 +6,8 @@
     <!-- Imagen actual -->
     <div class="form-group">
       <label>Imagen actual:</label>
-      <img [src]="'http://localhost:3800/api/get-image-pub/' + publication.image" alt="Imagen de publicación" class=" " />
+      <img [src]="'http://localhost:3800/api/get-image-pub/' + publication.image" alt="Imagen de publicación"
+        class=" " />
     </div>
 
     <!-- Cargar nueva imagen -->
@@ -28,7 +29,10 @@
     <!-- Categoría -->
     <div class="form-group">
       <label>Categoría</label>
-      <input type="text" [(ngModel)]="publication.category" name="category" required />
+      <select [(ngModel)]="publication.category" name="category" required>
+        <option value="" disabled selected>Selecciona una categoría</option>
+        <option *ngFor="let cat of categoryOptions" [value]="cat">{{ cat }}</option>
+      </select>
     </div>
 
     <!-- Imagen URL -->
@@ -39,9 +43,16 @@
 
     <!-- Tags -->
     <div class="form-group">
-      <label>Tags (separados por comas)</label>
-      <input type="text" [(ngModel)]="publication.tags" name="tags" required />
-    </div>
+        <label>Tags (puedes seleccionar varios)</label>
+        <div class="tag-checkboxes">
+          <label *ngFor="let tag of tagOptions">
+            <input type="checkbox" [value]="tag" #checkbox (change)="onTagToggle(tag, checkbox.checked)"
+              [checked]="publication.tags.includes(tag)" />
+
+            {{ tag }}
+          </label>
+        </div>
+      </div>
 
     <!-- Descripción -->
     <div class="form-group">

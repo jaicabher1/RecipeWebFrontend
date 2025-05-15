@@ -13,7 +13,10 @@
       <li class="comment-item">
         <div class="comment-user-info">
           <a [routerLink]="['/profile', comment.user._id]">
-            <img [src]="comment.user.image || 'assets/users/chef.jpg'" class="comment-avatar" alt="User" />
+            @if (comment.user) {
+            <img [src]="'http://localhost:3800/api/get-image-user/' + comment.user.image" class="comment-avatar"
+              alt="User">
+            }
           </a>
           <div class="comment-text-content">
             <div class="user-name">
@@ -21,7 +24,8 @@
               <span class="nick">{{ comment.user.nick }}</span>
             </div>
             <div class="comment-date">🗓️ {{ comment.createdAt | date: 'dd/MM/yyyy HH:mm' }}</div>
-            <div class="comment-text" [ngClass]="{ 'deleted-comment': comment.text === 'Este comentario ha sido eliminado.' }">
+            <div class="comment-text"
+              [ngClass]="{ 'deleted-comment': comment.text === 'Este comentario ha sido eliminado.' }">
               💬 "{{ comment.text }}"
             </div>
           </div>
@@ -29,7 +33,7 @@
           <button class="delete-btn" (click)="deleteComment(comment._id)" title="Eliminar comentario">
             Eliminar 🗑️
           </button>
-        }
+          }
         </div>
       </li>
       }
