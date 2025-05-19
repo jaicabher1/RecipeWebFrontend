@@ -13,8 +13,6 @@ import { CommonModule } from '@angular/common';
 })
 export class EditProfileComponent implements OnInit {
 
-  // NO SE ACTUALIZA NI EN HOME COMPONENT NI EN EDIT PROFILE COMPONENT
-
   user: User = new User();
   message: string | null = null;
   messageType: 'success' | 'error' | null = null;
@@ -27,7 +25,6 @@ export class EditProfileComponent implements OnInit {
     if (currentUserId) {
       this.userService.getUserById(currentUserId).subscribe({
         next: (response) => {
-          console.log(response.user);
           this.user = response.user;
         },
         error: (error) => {
@@ -49,7 +46,7 @@ export class EditProfileComponent implements OnInit {
       this.messageType = 'error';
       return;
     }
-    
+
     this.userService.updateUser(this.user._id, this.user).subscribe({
       next: () => {
         this.message = '✔ Perfil actualizado correctamente';
@@ -63,4 +60,29 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
+  selectedFile!: File;
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+
+  onUploadImage(): void {
+    if (!this.user._id || !this.selectedFile) {
+      this.message = '❌ Faltan datos o archivo.';
+      this.messageType = 'error';
+      return;
+    }
+
+    this.userService.uploadImage(this.user._id, this.selectedFile).subscribe({
+      next: (res: any) => {
+        this.message = '✔ Imagen de perfil actualizada.';
+        this.messageType = 'success';
+        this.user.image = res.image; // depende del backend → puede ser res.user.image
+      },
+      error: () => {
+        this.message = '❌ Error al subir imagen.';
+        this.messageType = 'error';
+      }
+    });
+  }
 }

@@ -1,94 +1,150 @@
-/* Contenedor principal de Home */
+/* Estilos generales */
 .home-wrapper {
-    width: 100%;
-    min-height: 100vh; /* que ocupe toda la altura visible */
-    padding: 40px 20px;
-    box-sizing: border-box;
-    /* Si la navbar superior ocupa ~70-80px, 
-       podrías añadir un margin-top para no quedar tapado */
-    margin-top: 70px;
-    /* No ponemos background aquí para que se vea el gradiente del body */
-  }
-  
-  /* Título principal */
-  .page-title {
-    text-align: center;
-    font-size: 2rem;
-    color: #ff5722;
-    margin-bottom: 50px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-  }
-  
-  /* Fila (sección) de imagen + texto */
-  .section-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 1200px; /* Centra y limita el bloque a 1200px */
-    margin: 0 auto 60px;
-    gap: 40px;
-    flex-wrap: wrap; /* Responsive en pantallas pequeñas */
-  }
-  
-  /* “Reverse” para invertir orden (imagen izda-texto dcha) */
-  .section-row.reverse {
-    flex-direction: row-reverse;
-  }
-  
-  /* Texto */
-  .section-text {
-    flex: 1;
-    min-width: 280px;
-  }
-  
-  .section-text h3 {
-    margin-top: 0;
-    font-size: 1.6rem;
-    color: #333;
-  }
-  
-  .section-text p {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #555;
-  }
-  
-  /* Imagen */
-  .section-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    min-width: 280px;
-  }
-  
-  .section-image img {
-    width: 100%;
-    max-width: 500px;
-    border-radius: 8px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .section-image img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  color: #333;
+  padding: 2rem;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+}
 
-  /* Mensaje de bienvenida */
-.welcome-message {
-  text-align: center;
-  font-size: 1.5rem;
+.home-wrapper.authenticated {
+  /* Elimina márgenes y paddings innecesarios */
+  margin: 0;
+  padding: 0;
+  
+  /* Ajusta la altura a tu gusto */
+  min-height: 80vh; /* 80% del alto de la ventana */
+  /* o un valor fijo */
+  /* height: 600px; */
+  box-sizing: border-box;
+  background-color: #fff; /* o el color de fondo que desees */
+}
+
+
+.branding-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.logo-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.branding-logo-large {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 15px;
+}
+
+.welcome-section {
+  flex: 2;
+  text-align: left;
+}
+
+.branding-title {
+  font-size: 3.5rem;
   font-weight: bold;
-  margin: 40px 0;
-  color: #ff5722;
+  margin-bottom: 1rem;
+  color: #333;
 }
 
-.welcome-message::before {
-  content: "🎉 ";
+.branding-title .highlight {
+  color: #8000ff;
 }
 
-.welcome-message::after {
-  content: " 🎉";
+.branding-subtitle {
+  font-size: 1.8rem;
+  margin-bottom: 3rem;
+  color: #555;
 }
-  
+
+.auth-buttons {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.auth-btn {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-btn {
+  background-color: #8000ff;
+  color: #fff;
+}
+
+.register-btn {
+  background-color: transparent;
+  border: 2px solid #8000ff;
+  color: #8000ff;
+}
+
+.auth-btn:hover {
+  transform: translateY(-2px);
+}
+
+.login-btn:hover {
+  background-color: #6a00d1;
+}
+
+.register-btn:hover {
+  background-color: #8000ff;
+  color: #fff;
+}
+
+.terms-section {
+  font-size: 1rem;
+  color: #666;
+}
+
+.terms-section a {
+  color: #8000ff;
+  text-decoration: none;
+}
+
+.terms-section a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos para usuarios autenticados */
+.home-wrapper.authenticated {
+  flex-direction: column;
+  text-align: center;
+  background-color: #fff;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.dashboard-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}

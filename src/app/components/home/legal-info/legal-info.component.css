@@ -1,0 +1,41 @@
+.legal-wrapper {
+    padding: 4rem;
+    max-width: 1200px;
+    margin: auto;
+    background-color: #fff;
+    color: #333;
+  }
+  .legal-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .legal-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  .legal-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  .status-tag {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #d9534f;
+  }
+  .legal-section h2 {
+    font-size: 1.75rem;
+    color: #02483E;
+    margin-top: 2rem;
+  }
+  .legal-section p, .legal-section ul {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+  .legal-section ul {
+    padding-left: 1.5rem;
+  }
+  .legal-section ul li {
+    list-style-type: disc;
+  }

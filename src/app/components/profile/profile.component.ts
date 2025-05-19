@@ -139,7 +139,8 @@ export class ProfileComponent implements OnInit {
   }
 
   onMyPublications(): void {
-    this.router.navigate(['/my-publications']);
+    if(this.followedId) this.router.navigate(['/publications/' + this.followedId]);
+    else this.router.navigate(['/my-publications']);
   }
 
   onEditProfile(): void {

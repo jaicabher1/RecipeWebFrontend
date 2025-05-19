@@ -14,51 +14,33 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [CommonModule, ReactiveFormsModule]
 })
 export class RegisterComponent implements OnInit {
-  public title: string;
-  public status: string;
-  public registerForm: FormGroup;
-  public serverErrorMessage: string;  // Para mostrar el mensaje de error del servidor
+  registerForm: FormGroup;
+  status: 'success' | 'error' | '' = '';
+  serverErrorMessage = '';
 
   constructor(
     private formBuilder: FormBuilder,
-    private __router: Router,
-    private __userService: UserService
+    private router: Router,
+    private userService: UserService
   ) {
-    this.title = 'Registrarse';
-    this.status = '';
-    this.serverErrorMessage = '';
-
-    // Inicializamos el formulario reactivo con sus validaciones
     this.registerForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
+      name: ['', Validators.required],
       surname: [''],
       email: ['', [Validators.required, Validators.email]],
-      nick: ['', [Validators.required]],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.pattern(/^(?=.*[A-Z])/),  // Al menos una mayúscula
-          Validators.pattern(/^(?=.*[0-9])/)   // Al menos un dígito
-        ]
-      ],
-      phoneNumber: ['', [Validators.required, Validators.pattern(/^\+34\d{9}$/)]],
-      bio: ['', [Validators.maxLength(255)]],
-      location: ['', [Validators.maxLength(100)]],
-      image: [''],
+      nick: ['', Validators.required],
+      password: ['', [Validators.required]],
+      phoneNumber: ['', [Validators.required, Validators.pattern(/^\+?[0-9]{10,15}$/)]],
+      bio: ['', Validators.maxLength(250)],
+      location: ['', Validators.maxLength(100)],
       isVerified: [false]
     });
   }
 
-  ngOnInit(): void {
-    console.log('Componente de registro cargado');
-  }
+  ngOnInit(): void {}
 
   onSubmit(): void {
-    // Limpiamos mensajes previos
-    this.serverErrorMessage = '';
     this.status = '';
+    this.serverErrorMessage = '';
 
     if (this.registerForm.valid) {
       const user = new User(
@@ -72,33 +54,29 @@ export class RegisterComponent implements OnInit {
         this.registerForm.value.bio,
         this.registerForm.value.location,
         this.registerForm.value.isVerified,
-        this.registerForm.value.image,
+        '', // imagen por defecto
         this.registerForm.value.phoneNumber
       );
 
-      this.__userService.register(user).subscribe({
-        next: (response) => {
-          // Si llega aquí, significa que el servidor respondió con status 2XX
-          if (response.user && response.user._id) {
+      this.userService.register(user).subscribe({
+        next: (res) => {
+          if (res.user && res.user._id) {
             this.status = 'success';
+            this.serverErrorMessage = '✔ Registro exitoso. Redirigiendo...';
+            setTimeout(() => this.router.navigate(['/login']), 2000);
           } else {
-            // Caso raro en que sea 2XX pero no venga user._id
             this.status = 'error';
-            this.serverErrorMessage = 'Respuesta inesperada del servidor.';
+            this.serverErrorMessage = '❌ Registro fallido.';
           }
         },
-        error: (errorResponse) => {
-          // Aquí se capturan errores HTTP (4XX, 5XX, etc.)
+        error: (err) => {
           this.status = 'error';
-          console.error('Error en el registro:', errorResponse);
-
-          // Extraemos mensaje proveniente de errorResponse.error.message (si existe)
-          this.serverErrorMessage = errorResponse.error?.message || 'Error al registrar el usuario. Inténtalo de nuevo.';
+          this.serverErrorMessage = err.error?.message || '❌ Error al registrar.';
         }
       });
     } else {
       this.status = 'error';
-      this.serverErrorMessage = 'Por favor, revisa los campos del formulario.';
+      this.serverErrorMessage = '❌ Revisa los campos marcados con *.';
     }
   }
 }

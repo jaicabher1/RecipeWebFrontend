@@ -6,11 +6,8 @@
       <!-- Iteramos sobre cada seguidor -->
       <div *ngFor="let follower of followers" class="follower-item">
         <!-- Imagen/avatar del seguidor (ajusta la propiedad según tu backend) -->
-        <img 
-          [src]="follower.user.image || 'assets/users/chef.jpg'" 
-          alt="Avatar" 
-          class="avatar"
-        />
+        <img [src]="'http://localhost:3800/api/get-image-user/' + follower.user.image" alt="Imagen de perfil"
+        class="avatar">
   
         <!-- Info del seguidor -->
         <div class="follower-info">

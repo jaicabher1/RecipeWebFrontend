@@ -48,7 +48,7 @@ export class PublicationService {
     );
   }
 
-  getMyPublications(): Observable<any> {
+  getMyPublications(userId: string | undefined): Observable<any> {
     const token = this.userService.getToken();
     if (!token) {
       return throwError(() => new Error('No token available'));
@@ -57,7 +57,7 @@ export class PublicationService {
       'Authorization': token.trim()
     });
 
-    return this.http.get(this.url + 'getmypublications', { headers }).pipe(
+    return this.http.get(this.url + 'getpublications/' + userId, { headers }).pipe(
       catchError((error) => {
         return throwError(() => error);
       })
@@ -132,4 +132,122 @@ export class PublicationService {
     );
   }
 
+  getNumLikes(id: string): Observable<any> {
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+
+    return this.http.get(this.url + 'numLikes/' + id, { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  sendLike(publicationId: string): Observable<any> {
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+
+    return this.http.post(this.url + 'like/' + publicationId, {}, { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  deleteLike(publicationId: string): Observable<any> {
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+
+    return this.http.delete(this.url + 'like/' + publicationId, { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  getComments(id: string): Observable<any> {
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+
+
+    return this.http.get(this.url + 'numComments/' + id, { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  sendComment(publicationId: string, text: string): Observable<any> {
+    const token = this.userService.getToken();
+    
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+
+    return this.http.post(this.url + 'comment/' + publicationId, { text }, { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  deleteComment(commentId: string): Observable<any> {
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+    let headers = new HttpHeaders({
+      'Authorization': token.trim()
+    });
+
+    return this.http.delete(this.url + 'comment/' + commentId, { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  uploadImagePublication(publicationId: string, file: File) {
+    const token = this.userService.getToken();
+    if (!token) {
+      return throwError(() => new Error('No token available'));
+    }
+  
+    const formData = new FormData();
+    formData.append('image', file, file.name); // asegúrate de que el nombre sea "image" como en tu backend
+  
+    const headers = new HttpHeaders().set('Authorization', token.trim());
+  
+    return this.http.post(
+      this.url + 'upload-image-pub/' + publicationId,
+      formData,
+      { headers }
+    ).pipe(
+      catchError((error) => throwError(() => error))
+    );
+  }
+  
 }

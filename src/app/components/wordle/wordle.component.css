@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #e3f2fd;
+}
+
+/* Contenedor principal */
+.wordle {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Título */
+.wordle-title {
+  font-size: 2rem;
+  color: #0d47a1;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.wordle-title span {
+  font-size: 1.5rem;
+}
+
+/* ===== TABLERO ===== */
+.board {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.tile {
+  width: 55px;
+  height: 55px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  line-height: 55px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+  background-color: #fff;
+}
+
+/* Colores de letras en el tablero */
+.correct {
+  background-color: #66bb6a;
+  color: white;
+  border-color: #66bb6a;
+}
+
+.present {
+  background-color: #ffa726;
+  color: white;
+  border-color: #ffa726;
+}
+
+.absent {
+  background-color: #90a4ae;
+  color: white;
+  border-color: #90a4ae;
+}
+
+/* ===== TECLADO ===== */
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.keyboard-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.keyboard-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Botón de letra */
+.keyboard button {
+  width: 42px;
+  height: 42px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* Botones anchos (ENTER, BORRAR) */
+.keyboard button.wide {
+  width: auto;
+  padding: 0 16px;
+  font-size: 0.95rem;
+  background-color: #1976d2;
+  color: #fff;
+}
+
+.keyboard button.wide:hover {
+  background-color: #0d47a1;
+}
+
+/* ===== COLORES DINÁMICOS DEL TECLADO ===== */
+.keyboard button.correct {
+  background-color: #66bb6a;
+  color: white;
+}
+
+.keyboard button.present {
+  background-color: #ffa726;
+  color: white;
+}
+
+.keyboard button.absent {
+  background-color: #90a4ae;
+  color: white;
+}
+
+.keyboard button.default {
+  background-color: #bbdefb;
+  color: #0d47a1;
+}
+
+.keyboard button:hover:not(.wide) {
+  filter: brightness(1.1);
+}

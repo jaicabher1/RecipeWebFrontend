@@ -1,28 +1,40 @@
 <div class="user-search-container">
+  <div class="hero-container">
+    <h1 class="hero-subtitle">Conecta con</h1>
+    <h1 class="hero-title">La comunidad culinaria</h1>
+    <h3 class="hero-tagline">
+      Descubre y sigue a cocineros de todo el mundo con nuestro buscador
+    </h3>
+  </div>
+
+  <!-- Buscador -->
+  <div class="search-box">
     <input
       type="text"
       [(ngModel)]="searchTerm"
       (input)="getProfileByName(searchTerm)"
-      placeholder="Buscar por nick..."
+      placeholder="🔍 Buscar cocineros por su nick"
     />
-  
-    @if (filteredUsers) {
-      <div>
-         @for (user of filteredUsers; track user._id) {
-          <div class="user-card">
-            <a [routerLink]="['/profile', user._id]">
-                <img [src]="user.image || 'assets/default-user.jpg'" alt="Avatar" class="user-avatar" />
-            </a>
-            <div>
-              <h2>{{ user.nick }}</h2>
-              <p>{{ user.name + " " + user.surname }}</p>
-              <p>{{ user.location }}</p>
-            </div>
-          </div>
-        }
-      </div>
-    } @else {
-      <p>No se encontraron usuarios.</p>
-    }
   </div>
-  
+
+  <!-- Resultados -->
+  @if (filteredUsers) {
+    <div class="results">
+      @for (user of filteredUsers; track user._id) {
+        <div class="user-card">
+          <a [routerLink]="['/profile', user._id]">
+            <img [src]="'http://localhost:3800/api/get-image-user/' + user.image" alt="Imagen de perfil"
+        class="user-avatar">
+          </a>
+          <div class="user-info-text">
+            <h2>{{ user.nick }}</h2>
+            <p>{{ user.name + " " + user.surname }}</p>
+            <p class="location">{{ user.location }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <p class="no-results">No se encontraron usuarios.</p>
+  }
+</div>

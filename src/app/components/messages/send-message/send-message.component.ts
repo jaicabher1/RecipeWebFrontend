@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class SendMessageComponent {
   @Input() user: any;
-  @Output() messageSent = new EventEmitter<void>(); // ⬅️ NUEVO
+  @Output() messageSent = new EventEmitter<void>();
 
   myUser: any;
   messageText: string = '';
@@ -36,7 +36,7 @@ export class SendMessageComponent {
     this.messageService.sendMessage(message).subscribe(
       response => {
         this.messageText = '';
-        this.messageSent.emit(); // ⬅️ EMITE evento para que el padre recargue el chat
+        this.messageSent.emit();
       },
       error => console.error('Error enviando mensaje', error)
     );

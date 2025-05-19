@@ -1,0 +1,35 @@
+<div class="modal-backdrop" (click)="onClose()"></div>
+
+<div class="modal-container" (click)="$event.stopPropagation()">
+  <div class="modal-header">
+    <h3>Usuarios que dieron like</h3>
+    <button class="close-btn" (click)="onClose()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    @if (likes && likes.length > 0) {
+    <ul class="like-list">
+      @for (like of likes; track like._id) {
+      <li class="like-item">
+        <div class="like-user-info">
+          <a [routerLink]="['/profile', like.user._id]">
+            @if (like.user) {
+            <img [src]="'http://localhost:3800/api/get-image-user/' + like.user.image" class="like-avatar" alt="User">
+            }
+          </a>
+          <div class="like-text-content">
+            <div class="user-name">
+              {{ like.user.name }} {{ like.user.surname }}
+              <span class="nick">{{ like.user.nick }}</span>
+            </div>
+            <div class="like-date">👍 Le dio like el {{ like.createdAt | date: 'dd/MM/yyyy HH:mm' }}</div>
+          </div>
+        </div>
+      </li>
+      }
+    </ul>
+    } @else {
+    <p>No hay likes en esta publicación. 🤍</p>
+    }
+  </div>
+</div>

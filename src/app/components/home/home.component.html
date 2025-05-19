@@ -1,25 +1,40 @@
-<div class="home-wrapper">
-  @if (userService.isAuthenticated()) {
-  <h2 class="page-title">
-    🍕 ¡Bienvenido, <strong>{{ userName }}</strong>! 🍕
-  </h2>
-  } @else {
-  <h2 class="page-title">Welcome to Our Cooking Site!</h2>
-  }
-  @if (!userService.isAuthenticated()) {
-  <!-- Recorrido de secciones (imagen + texto) -->
-  <div *ngFor="let section of sections" class="section-row" [ngClass]="{'reverse': section.imagePosition === 'left'}">
-
-    <!-- Texto -->
-    <div class="section-text">
-      <h3>{{ section.title }}</h3>
-      <p>{{ section.description }}</p>
+<!-- Vista para usuarios NO autenticados -->
+<div *ngIf="!userService.isAuthenticated(); else authenticatedTemplate" class="home-wrapper">
+  <div class="branding-container">
+    <div class="logo-section">
+      <img src="assets/logo.png" alt="Logo Rechefy" class="branding-logo-large" />
     </div>
-
-    <!-- Imagen -->
-    <div class="section-image">
-      <img [src]="section.imageUrl" [alt]="section.title" />
+    <div class="welcome-section">
+      <h1 class="branding-title">Bienvenido a <span class="highlight">Rechefy</span></h1>
+      <h2 class="branding-subtitle">Comparte, descubre y disfruta de las mejores recetas.</h2>
+      <div class="auth-buttons">
+        <a href="/login">
+          <button class="auth-btn login-btn">Iniciar Sesión</button>
+        </a>
+        <a href="/register">
+          <button class="auth-btn register-btn">Registrarse</button>
+        </a>
+      </div>
+      <div class="terms-section">
+        <p class="terms-text">
+          Al continuar, aceptas nuestros 
+          <a href="legal/terms">Términos de servicio</a> y 
+          <a href="legal/privacy">Política de privacidad</a>.
+        </p>
+      </div>
     </div>
   </div>
-  }
 </div>
+
+<!-- Vista para usuarios autenticados -->
+<ng-template #authenticatedTemplate>
+  <div class="home-wrapper authenticated">
+    <h2 class="page-title">
+      ¡Hola, <span class="highlight">{{ userName }}</span>! 👋
+    </h2>
+    <div class="dashboard-container">
+      <!-- Se inserta aquí el componente del dashboard -->
+      <app-dashboards></app-dashboards>
+    </div>
+  </div>
+</ng-template>

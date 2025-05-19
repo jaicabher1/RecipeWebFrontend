@@ -38,24 +38,29 @@ export class ChatDetailComponent implements OnChanges, AfterViewChecked {
   }
 
   loadMessagesWithUser(): void {
+ 
     this.messageService.getMyMessages().subscribe(
       sent => {
         this.messageService.getReceivedMessages().subscribe(
-          received => {
+          received => {  
             const allMessages = [...sent.messages, ...received.messages];
-            this.messages = allMessages.filter(msg =>
-              (msg.emitter === this.myUser._id && msg.receiver._id === this.user._id) ||
-              (msg.receiver === this.myUser._id && msg.emitter._id === this.user._id)
-            ).sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-
+    
+            this.messages = allMessages.filter(msg => {
+                return (
+                (msg.emitter === this.myUser._id && msg.receiver._id === this.user._id) ||
+                (msg.receiver === this.myUser._id && msg.emitter._id === this.user._id)
+              );
+            }).sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+            
             this.shouldScrollToBottom = true;
           },
-          err => console.error('Error mensajes recibidos', err)
+          err => console.error('Error al obtener mensajes recibidos:', err)
         );
       },
-      err => console.error('Error mensajes enviados', err)
+      err => console.error('Error al obtener mensajes enviados:', err)
     );
   }
+  
 
   scrollToBottom(): void {
     if (this.messagesContainer) {

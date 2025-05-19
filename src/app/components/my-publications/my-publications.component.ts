@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { PublicationService } from '../../services/publication/publication.service';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../../services/user/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-my-publications',
@@ -12,30 +14,45 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './my-publications.component.css'
 })
 export class MyPublicationsComponent implements OnInit {
-
   publications: any[] = [];
   selectedPublication: any = null;
+  creatorPublications: boolean = false;
 
   creatingPublication = false;
   newPublication: any = {};
 
-  // Opciones válidas para enums
-  categoryOptions: string[] = ['Vegano', 'Vegetariano', 'Carnes', 'Postres', 'Bebidas', 'Pescado'];
-  tagOptions: string[] = ['Saludable', 'Rápido', 'Económico', 'Sin Gluten', 'Sin Lactosa'];
+  selectedFile!: File;
 
-  constructor(private publicationService: PublicationService, private router: Router) { }
+  categoryOptions: string[] = ['Desayuno', 'Almuerzo', 'Cena', 'Postre', 'Snack', 'Vegano', 'Vegetariano', 'Sin Gluten', 'Sin Lactosa'];
+  tagOptions: string[] = ['Rápido','Vegetariano','Dulce', 'Fácil', 'Saludable', 'Económico', 'Internacional', 'Gourmet', 'Tradicional', 'Fiesta', 'Navidad', 'Halloween', 'San Valentín', 'Verano', 'Invierno', 'Otoño', 'Primavera','Internacional','Sin Gluten','Sin Lactosa','Vegano'];
+
+  constructor(
+    private route: ActivatedRoute,
+    private publicationService: PublicationService,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.loadMyPublications();
   }
 
+  getImageUrl(imageName: string): string {
+    if (!imageName) return 'assets/recipes/default-image.jpg';
+    return `http://localhost:3800/api/get-image-pub/${imageName}`;
+  }
+
   loadMyPublications(): void {
-    this.publicationService.getMyPublications().subscribe({
+    const id = this.route.snapshot.paramMap.get('userId');
+    const userId = id === null ? this.userService.getMyUser()?._id : id;
+    this.creatorPublications = id === null;
+
+    this.publicationService.getMyPublications(userId).subscribe({
       next: (response: any) => {
         this.publications = response.publications;
       },
       error: (error: any) => {
-        console.error('Error in request:', error);
+        console.error('Error al cargar publicaciones:', error);
       }
     });
   }
@@ -76,12 +93,13 @@ export class MyPublicationsComponent implements OnInit {
       description: '',
       steps: '',
       difficulty: 'Fácil',
-      prepTime: 0
+      prepTime: 0,
     };
   }
 
   closeNewPublication(): void {
     this.creatingPublication = false;
+    this.selectedFile = undefined!;
   }
 
   onTagToggle(tag: string, isChecked: boolean): void {
@@ -94,11 +112,15 @@ export class MyPublicationsComponent implements OnInit {
     }
   }
 
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+
   savePublication(): void {
-    // Validaciones previas
+    // Validaciones
     if (!this.newPublication.title || !this.newPublication.category || !this.newPublication.description ||
-      !this.newPublication.ingredients || !this.newPublication.steps ||
-      !this.newPublication.difficulty || !this.newPublication.prepTime) {
+        !this.newPublication.ingredients || !this.newPublication.steps ||
+        !this.newPublication.difficulty || !this.newPublication.prepTime) {
       alert('❌ Faltan campos obligatorios');
       return;
     }
@@ -110,21 +132,39 @@ export class MyPublicationsComponent implements OnInit {
 
     const invalidTags = this.newPublication.tags.filter((tag: string) => !this.tagOptions.includes(tag));
     if (invalidTags.length > 0) {
-      alert('❌ Hay tags no válidos: ' + invalidTags.join(', '));
+      alert('❌ Tags inválidos: ' + invalidTags.join(', '));
       return;
     }
 
-    // 👉 Convertir tags a string antes de enviar al backend
     const publicationToSend = {
       ...this.newPublication,
       tags: this.newPublication.tags.join(',')
     };
 
     this.publicationService.savePublication(publicationToSend).subscribe({
-      next: () => {
-        alert('Publicación guardada correctamente.');
-        this.closeNewPublication();
-        this.loadMyPublications();
+      next: (res: any) => {
+        const createdId = res.publication._id;
+
+        // Subir imagen si se ha seleccionado
+        if (this.selectedFile) {
+          const token = this.userService.getToken();
+          this.publicationService.uploadImagePublication(createdId, this.selectedFile).subscribe({
+            next: () => {
+              alert('Publicación y imagen guardadas correctamente.');
+              this.closeNewPublication();
+              this.loadMyPublications();
+            },
+            error: () => {
+              alert('Publicación creada pero error al subir imagen.');
+              this.closeNewPublication();
+              this.loadMyPublications();
+            }
+          });
+        } else {
+          alert('Publicación guardada sin imagen.');
+          this.closeNewPublication();
+          this.loadMyPublications();
+        }
       },
       error: () => alert('Error al guardar la publicación.')
     });

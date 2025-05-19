@@ -1,0 +1,36 @@
+<div class="dashboard">
+  <h2 class="dashboard-title">Dashboard</h2>
+  
+  <!-- Filtro por categoría -->
+  <div class="filter-section">
+    <label for="categoryFilter">Filtrar por categoría:</label>
+    <select id="categoryFilter" (change)="onCategoryChange($event)">
+      <option value="all">Todas las categorías</option>
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+  </div>
+  
+  <!-- Filtro por año -->
+  <div class="filter-section">
+    <label for="yearFilter">Filtrar por año:</label>
+    <select id="yearFilter" (change)="onYearChange($event)">
+      <option value="all">Todos los años</option>
+      <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+    </select>
+  </div>
+  
+  <!-- Contenedor de gráficas -->
+  <div class="charts-container">
+    <!-- Gráfico de publicaciones por Mes -->
+    <div class="chart-container">
+      <h3>Publicaciones por Mes</h3>
+      <canvas id="MyChart" aria-label="Gráfico de publicaciones por mes" role="img"></canvas>
+    </div>
+    
+    <!-- Gráfico de seguidores y seguidos -->
+    <div class="chart-container">
+      <h3>Crecimiento de Seguidores y Seguidos</h3>
+      <canvas id="FollowersChart" aria-label="Gráfico de seguidores y seguidos" role="img"></canvas>
+    </div>
+  </div>
+</div>

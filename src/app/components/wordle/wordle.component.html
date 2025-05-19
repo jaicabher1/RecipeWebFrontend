@@ -1,0 +1,24 @@
+<div class="wordle">
+  <h2 class="wordle-title">Wordle de Ingredientes <span>🍅</span></h2>
+
+  <div class="board">
+    <div class="row" *ngFor="let row of guesses; let rowIndex = index">
+      <div class="tile" [ngClass]="getTileClass(rowIndex, i)" *ngFor="let letter of row; let i = index">
+        {{ letter }}
+      </div>
+    </div>
+  </div>
+
+  <div class="keyboard">
+    <div class="keyboard-row">
+      <button *ngFor="let key of keyboard" [ngClass]="letterColors[key] || 'default'" (click)="handleKey(key)">
+        {{ key }}
+      </button>
+
+    </div>
+    <div class="keyboard-actions">
+      <button class="wide" (click)="handleKey('Backspace')">⌫ Borrar</button>
+      <button class="wide" (click)="handleKey('Enter')">↵ Enviar</button>
+    </div>
+  </div>
+</div>

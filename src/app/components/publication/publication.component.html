@@ -1,43 +1,88 @@
 <div class="publications-container">
-    <!-- Publicación -->
-    <div class="publication-card" *ngFor="let publication of publications">
-      <div class="user-info">
-        <a [routerLink]="['/profile', publication.user]">
-          <img [src]="publication.userModel.image || 'assets/users/chef.jpg'" alt="Usuario" class="user-image clickable-avatar">
-        </a>
-        <div class="user-name">{{ publication.userModel.name + " " + publication.userModel.surname }}</div>
+  @for (publication of publications; track publication._id) {
+  <div class="publication-card">
+
+    <!-- Información del usuario -->
+    <div class="user-info">
+      <a [routerLink]="['/profile', publication.user]">
+        @if (publication.userModel) {
+          <img [src]="'http://localhost:3800/api/get-image-user/' + publication.userModel.image" alt="Imagen de perfil"
+          class="user-image clickable-avatar">
+        }
+      </a>
+      @if (publication.userModel) {
+      <div class="user-name">
+        {{ publication.userModel.name }} {{ publication.userModel.surname }}
       </div>
-           
-  
-      <div class="publication-image">
-        <img [src]="publication.image || 'default-image.jpg'" alt="Receta" class="image">
+      }
+    </div>
+
+    <!-- Imagen de la publicación -->
+    <div class="publication-image">
+      <img [src]="getImageUrl(publication.image)" alt="Receta" class="image">
+    </div>
+
+    <!-- Detalles de la publicación -->
+    <div class="publication-details">
+
+      <div class="title-category">
+        <h3 class="title">{{ publication.title }}</h3>
+        <span class="category">{{ publication.category }}</span>
       </div>
-  
-      <div class="publication-details">
-        <div class="title-category">
-          <h3 class="title">{{ publication.title }}</h3>
-          <span class="category">{{ publication.category }}</span>
-        </div>
-  
-        <div class="tags">
-          <span *ngFor="let tag of publication.tags" class="tag">{{ tag }}</span>
-        </div>
-  
-        <div class="description">
-          <p>{{ publication.description }}</p>
-        </div>
-  
-        <div class="steps" *ngIf="publication.steps">
-          <h4>Pasos:</h4>
-          <p>{{ publication.steps }}</p>
-        </div>
-  
-        <div class="footer">
-          <span class="views">👁️ {{ publication.views }} vistas</span>
-          <span class="difficulty">Nivel: {{ publication.difficulty }}</span>
-          <span class="prep-time">⏳ {{ publication.prepTime }} min</span>
-        </div>
+
+      <!-- Tags -->
+      <div class="tags">
+        @for (tag of publication.tags; track tag) {
+        <span class="tag">{{ tag }}</span>
+        }
       </div>
+
+      <!-- Descripción -->
+      <div class="description">
+        <p>{{ publication.description }}</p>
+      </div>
+
+      <!-- Pasos -->
+      @if (publication.steps) {
+      <div class="steps">
+        <h4>Pasos:</h4>
+        <p>{{ publication.steps }}</p>
+      </div>
+      }
+
+      <div class="footer">
+        <span class="difficulty">Nivel: {{ publication.difficulty }}</span>
+        <span class="prep-time">⏳ {{ publication.prepTime }} min</span>
+        <!-- Botón de mostrar likes por publicación -->
+
+        <!-- Botón de like que cambia dinámicamente -->
+        <span class="likes clickable">
+          <!-- ❤️ o 🤍 → toggle like -->
+          <span class="heart-icon" (click)="toggleLike(publication._id)">
+            @if (isLiked(publication._id)) {
+            ❤️
+            } @else {
+            🤍
+            }
+          </span>
+
+          <!-- contador de likes → abre modal -->
+          <span class="like-count" (click)="openLikesModal(publication._id)">
+            {{ getLikeCount(publication._id) }} likes
+          </span>
+        </span>
+
+        <!-- Componente modal de likes -->
+        <app-like-modal *ngIf="showLikesModal" [likes]="selectedLikes" (close)="closeLikesModal()"></app-like-modal>
+        <span class="heart-icon" (click)="openCommentsModal(publication._id)">
+          💬 {{ getCommentCount(publication._id) }} comentarios
+        </span>
+        <app-comment-modal *ngIf="showCommentsModal" [publicationId]="selectedPublicationId" [currentUserId]="currentUserId" [comments]="selectedComments" (close)="closeCommentsModal()">
+        </app-comment-modal>
+
+      </div>
+
     </div>
   </div>
-  
+  }
+</div>

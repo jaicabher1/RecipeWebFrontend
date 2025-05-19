@@ -1,46 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
-import { User } from '../../models/user'; // Asegúrate de importar tu modelo
+import { User } from '../../models/user';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { FollowService } from '../../services/follow/follow.service';
-import { Follow } from '../../models/follow';
 
 @Component({
   selector: 'app-get-user-profile',
   templateUrl: './get-user-profile.component.html',
   styleUrls: ['./get-user-profile.component.css'],
-  imports: [FormsModule, RouterLink]
+  imports: [FormsModule, RouterLink],
+  standalone: true
 })
-export class GetUserProfileComponent {
+export class GetUserProfileComponent implements OnInit {
+  users: User[] = [];
+  filteredUsers: User[] = [];
+  searchTerm: string = '';
 
-  users: User[] = [];              // Lista completa
-  filteredUsers: User[] = [];     // Lista filtrada
-  searchTerm: string = '';        // Término de búsqueda
+  constructor(private userService: UserService) {}
 
-  constructor(private userService: UserService) { }
-
-  ngOnInit() {
-    this.getUsers(); // solo una vez al inicio
+  ngOnInit(): void {
+    this.getUsers();
   }
 
-  getUsers() {
-    this.userService.getAllUsers().subscribe(
-      response => {
+  getUsers(): void {
+    this.userService.getAllUsers().subscribe({
+      next: (response) => {
         this.users = response.users;
-        this.filteredUsers; // copiar todos los usuarios al inicio
+        this.filteredUsers = [...this.users]; 
       },
-      error => {
-        console.log(error);
+      error: (err) => {
+        console.error(err);
       }
-    );
+    });
   }
 
-  getProfileByName(nick: string) {
+  getProfileByName(nick: string): void {
     this.filteredUsers = this.users.filter(u =>
       u.nick.toLowerCase().includes(nick.toLowerCase())
     );
   }
-
-
 }
